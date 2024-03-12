@@ -1,8 +1,10 @@
-import React from 'react'
-import styles from './style.module.css'
+import Users from "../../features/users/users"
 
 export const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      Home
+      <Users />
+    </div>
   )
 }
