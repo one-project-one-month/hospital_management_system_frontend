@@ -9,3 +9,4 @@ export function NewApiService(name) {
       return new Backend();
   }
 }
+export const api  = NewApiService("backend")
