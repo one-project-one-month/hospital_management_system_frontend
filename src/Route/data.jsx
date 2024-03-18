@@ -16,8 +16,7 @@ export const routes = [
                 path: "doctor",
                 children: [
                     {
-                        // index: true,
-                        path: "doctorList",
+                        index: true,
                         element: <h1>Doctor List</h1>,
                     },
                     {
@@ -30,8 +29,7 @@ export const routes = [
                 path: "patient",
                 children: [
                     {
-                        // index: true,
-                        path: "patientList",
+                        index: true,
                         element: <h1>Patient List</h1>
                     },
                     {

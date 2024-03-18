@@ -4,7 +4,7 @@ import Header from "@/components/Header/Header";
 
 function Main() {
   return (
-    <div className=" font-primary flex h-svh w-svw">
+    <div className=" font-primary flex h-svh w-svw dark:bg-neutral-950">
       <SideBar />
       <div className="grow">
         <Header/>

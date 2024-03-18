@@ -5,7 +5,7 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 export default function SideBar() {
   return (
-    <aside className=" w-52 px-4 py-3 border-r border-r-neutral-200 flex flex-col">
+    <aside className=" w-52 px-4 py-3 border-r border-r-neutral-200 flex flex-col dark:border-r-neutral-700">
       <div>
         <Link className=" flex items-center gap-x-2" to={"/"}>
           <img className=" h-8" src={logo} />

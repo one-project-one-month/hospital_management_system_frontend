@@ -11,7 +11,7 @@ const navLinks = [
     icon: <Stethoscope size={16} />,
     url: "/doctor",
     nested: [
-      { title: "Doctor List", url: "/doctor/doctorList" },
+      { title: "Doctor List", url: "/doctor"},
       { title: "Doctor Specialist", url: "/doctor/doctorSpecialist" },
     ],
   },
@@ -20,7 +20,7 @@ const navLinks = [
     icon: <Bed size={16} />,
     url: "/patient",
     nested: [
-      { title: "Patient List", url: "/patient/patientList" },
+      { title: "Patient List", url: "/patient"},
       { title: "Medical Records", url: "/patient/medicalRecords" },
     ],
   },
@@ -36,6 +36,7 @@ function Nav() {
         {navLinks.map((navLink, id) => {
           return (
             <NavLinkButton
+              key={id}
               title={navLink.title}
               url={navLink.url}
               icon={navLink.icon}
@@ -64,8 +65,8 @@ function NavLinkButton({ title, url, icon, nested }) {
     >
       <NavLink
         onClick={dropDownToggle}
-        to={url}
         state={{title}}
+        to={url}
         className={({ isActive }) =>
           cn(
             "flex items-center gap-x-2 text-sm text-neutral-500 active:scale-[.98]",
@@ -79,18 +80,20 @@ function NavLinkButton({ title, url, icon, nested }) {
         {nested && <ChevronsUpDown size={13} />}
       </NavLink>
       {nested && (
-        <div className="relative before:block before:absolute before:left-5 before:inset-y-2.5 before:w-0.5 before:bg-neutral-200 pl-6 py-1 flex flex-col gap-y-1">
-          {nested.map(({title, url}) => {
+        <div className="relative before:block before:absolute before:left-5 before:inset-y-2.5 before:w-0.5 before:bg-neutral-200 dark:before:bg-neutral-500 pl-6 py-1 flex flex-col gap-y-1">
+          {nested.map(({title, url}, id) => {
             return (
               <NavLink
               state={{title}}
+              key={id}
                 className={({ isActive }) =>
                   cn(linkStyle, {
-                    "before:block before:absolute before:-left-1 before:top-1.5 before:w-0.5 before:h-5 before:rounded-full before:bg-blue-500 text-black":
+                    "before:block before:absolute before:-left-1 before:top-1.5 before:w-0.5 before:h-5 before:rounded-full before:bg-blue-500 text-black dark:text-white":
                       isActive,
                   })
                 }
                 to={url}
+                end
               >
                 {title}
               </NavLink>
