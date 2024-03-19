@@ -1,11 +1,12 @@
+
 export default class Backend {
-  get() {
+  async get() {
     // const res = await fetch("api.example.com/");
     // if (!res.ok) throw new Error("Error occured in users fetching");
     // return res.json();
-    return [
-      { id: 0, name: "mg mg" },
-      { id: 1, name: "hla hla" },
-    ];
+
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+
+    return await response.json();
   }
 }
