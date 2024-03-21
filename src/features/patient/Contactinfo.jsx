@@ -3,12 +3,12 @@ import { useState } from 'react';
 import Steppers from './Steppers';
 import { Button } from '@/components/ui/button';
 import { useDispatch, useSelector } from 'react-redux';
-import { setContactInfo, setIsContactFormComplete, setContactIsClick } from '../../store/contactSlice';
+import { setContactInfo, setIsContactFormComplete, setIsContactFormClick } from '../../store/contactSlice';
 
 const Contactinfo = () => {
   const contactInfo = useSelector(state => state.contact.contactInfo);
-  const isFormComplete = useSelector(state => state.contact.isFormComplete);
-  const isClick = useSelector(state => state.contact.isClick);
+  const isContactFormComplete = useSelector(state => state.contact.isFormComplete);
+  const isContactFormClick = useSelector(state => state.contact.isClick);
   const dispatch = useDispatch();
   
   const changeHandler = (e) => {
@@ -17,7 +17,7 @@ const Contactinfo = () => {
   }
   
   const clickHandler = () => {
-    dispatch(setContactIsClick(true));
+    dispatch(setIsContactFormClick(true));
     // Check if contact info form is complete
     const contactInfoFormComplete = Object.keys(contactInfo).every(key => contactInfo[key]);
     dispatch(setIsContactFormComplete(contactInfoFormComplete));
@@ -42,13 +42,13 @@ const Contactinfo = () => {
                   type="text" 
                   name="phoneNumber" 
                   id="phoneNumber" 
-                  className={`w-[80%] bg-gray-50 outline ${isClick && !contactInfo.phoneNumber ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
+                  className={`w-[80%] bg-gray-50 outline ${isContactFormClick && !contactInfo.phoneNumber ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
                   text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
                   value={contactInfo.phoneNumber}
                   onChange={changeHandler}
                   placeholder='Enter your phone number'
                 />
-                { isClick && !contactInfo.phoneNumber ? <div className='w-full flex items-center mt-1 gap-1'> 
+                { isContactFormClick && !contactInfo.phoneNumber ? <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please fill in your phone number</span>
                 </div>
@@ -65,13 +65,13 @@ const Contactinfo = () => {
                   type="text" 
                   name="email" 
                   id="email" 
-                  className={`w-[80%] bg-gray-50 outline ${isClick && !contactInfo.email ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
+                  className={`w-[80%] bg-gray-50 outline ${isContactFormClick && !contactInfo.email ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
                   text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
                   value={contactInfo.email}
                   onChange={changeHandler}
                   placeholder='Enter your email'
                 />
-                { isClick && !contactInfo.email ? <div className='w-full flex items-center mt-1 gap-1'> 
+                { isContactFormClick && !contactInfo.email ? <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please fill in your email</span>
                 </div>
@@ -89,13 +89,13 @@ const Contactinfo = () => {
                   type="text" 
                   name="address" 
                   id="address" 
-                  className={`w-[40%] bg-gray-50 outline ${isClick && !contactInfo.address ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
+                  className={`w-[40%] bg-gray-50 outline ${isContactFormClick && !contactInfo.address ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
                   text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
                   value={contactInfo.address}
                   onChange={changeHandler}
                   placeholder='Enter your address'
                 />
-                { isClick && !contactInfo.address ? <div className='w-full flex items-center mt-1 gap-1'> 
+                { isContactFormClick && !contactInfo.address ? <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please fill in your address</span>
                 </div>

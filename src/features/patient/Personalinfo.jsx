@@ -3,13 +3,14 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import Steppers from './Steppers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPersonalInfo, setIsFormComplete, setIsClick } from '../../store/formSlice';
+import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } from '../../store/form';
+
 
 
 const Personalinfo = () => {
   const personalInfo = useSelector(state => state.form.personalInfo);
-  const isFormComplete = useSelector(state => state.form.isFormComplete);
-  const isClick = useSelector(state => state.form.isClick);
+  const isPersonalFormComplete = useSelector(state => state.form.isFormComplete);
+  const isPersonalFormClick = useSelector(state => state.form.isClick);
   const dispatch = useDispatch();
 
   const changeHandler = (e) => {
@@ -18,10 +19,10 @@ const Personalinfo = () => {
   }
 
   const clickHandler = () => {
-    dispatch(setIsClick(true));
+    dispatch(setIsPersonalFormClick(true));
     // Check if personal info form is complete
     const personalInfoFormComplete = Object.keys(personalInfo).every(key => personalInfo[key]);
-    dispatch(setIsFormComplete(personalInfoFormComplete));
+    dispatch(setIsPersonalFormComplete(personalInfoFormComplete));
   }
 
   const infoRedIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="w-4 h-4 ">
@@ -44,13 +45,13 @@ const Personalinfo = () => {
                   type="text" 
                   name="fullName" 
                   id="fullName" 
-                  className={`w-[80%] bg-gray-50 outline ${isClick && !personalInfo.fullName ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
+                  className={`w-[80%] bg-gray-50 outline ${isPersonalFormClick && !personalInfo.fullName ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
                   text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
                   value={personalInfo.fullName}
                   onChange={changeHandler}
                   placeholder='Enter full name'
                 />
-                {isClick && !personalInfo.fullName ? (
+                {isPersonalFormClick && !personalInfo.fullName ? (
                   <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please fill in a full name</span>
@@ -68,12 +69,12 @@ const Personalinfo = () => {
                   type="date" 
                   name="dateOfBirth" 
                   id="dob" 
-                  className={`w-[80%] bg-gray-50 outline ${isClick && !personalInfo.fullName ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
+                  className={`w-[80%] bg-gray-50 outline ${isPersonalFormClick && !personalInfo.fullName ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
                   text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
                   value={personalInfo.dateOfBirth}
                   onChange={changeHandler}
                 />
-                { isClick && !personalInfo.dateOfBirth ? <div className='w-full flex items-center mt-1 gap-1'> 
+                { isPersonalFormClick && !personalInfo.dateOfBirth ? <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please fill in a complete birthday</span>
                 </div>
@@ -89,13 +90,13 @@ const Personalinfo = () => {
                 <label className='text-base font-semibold'>Select Gender</label>
                 <select id="gender" value={personalInfo.gender} onChange={changeHandler}
                   name="gender" className={`bg-gray-50 outline  text-gray-900 
-                text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isClick && !personalInfo.gender ? 'outline-red-400' : 'outline-gray-300'} `}>
+                text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isPersonalFormClick && !personalInfo.gender ? 'outline-red-400' : 'outline-gray-300'} `}>
                     <option value="">Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                 </select>
-                { isClick && !personalInfo.gender ? <div className='w-full flex items-center mt-1 gap-1'> 
+                { isPersonalFormClick && !personalInfo.gender ? <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please select your gender</span>
                 </div>

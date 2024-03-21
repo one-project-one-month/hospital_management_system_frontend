@@ -9,9 +9,6 @@ export const Home = () => {
     <div>
       {/* Home
       <Users /> */}
-      {/* <Personalinfo/> */}
-      {/* <Contactinfo/> */}
-      {/* <MedicalRecords/> */}
       <Pateint/>
     </div>
   )

@@ -17,14 +17,14 @@ const formSlice = createSlice({
     setPersonalInfo: (state, action) => {
       state.personalInfo = { ...state.personalInfo, ...action.payload };
     },
-    setIsFormComplete: (state, action) => {
+    setIsPersonalFormComplete: (state, action) => {
       state.isFormComplete = action.payload;
     },
-    setIsClick: (state, action) => {
+    setIsPersonalFormClick: (state, action) => {
       state.isClick = action.payload;
     }
   }
 });
 
-export const { setPersonalInfo, setIsFormComplete, setIsClick } = formSlice.actions;
+export const { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } = formSlice.actions;
 export default formSlice.reducer;

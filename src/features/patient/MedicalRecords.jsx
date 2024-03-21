@@ -2,26 +2,23 @@ import React from 'react'
 import { useState } from 'react';
 import Steppers from './Steppers'
 import { Button } from '@/components/ui/button';
+import { useSelector,useDispatch } from 'react-redux';
+import {setMedicalRecordInfo,setIsMedicalRecordComplete,setIsMedicalRecordClick} from '../../store/medicalRecordSlice'
 
 const MedicalRecords = () => {
-
-  const [medicalRecord, setMedicalRecord] = useState({  
-    bloodType :'',
-  });
-
-  const [isFormComplete,setIsFormComplete] = useState (false);
-    
-  const [isClick,setIsClick] = useState (false);
-    
+    const medicalRecordInfo = useSelector(state => state.medicalRecord.medicalRecordInfo);
+    const isMedicalRecordClick = useSelector(state => state.medicalRecord.isClick);
+    const dispatch = useDispatch();
+    console.log(isMedicalRecordClick)
   const changeHandler = (e) => {
    const {name,value} = e.target;
-   setMedicalRecord((prevInfo) => ({...prevInfo,[name] : value } ))
+   dispatch(setMedicalRecordInfo({ [name] : value }));
   }
       
   const clickHandler = () => {
-    setIsClick(true)
-    const formComplete = Object.keys(medicalRecord).every(key => medicalRecord[key]);
-    setIsFormComplete(formComplete)
+    dispatch(setIsMedicalRecordClick(true));
+    const MedicalRecordInfoFormComplete = Object.keys(medicalRecordInfo).every(key => medicalRecordInfo[key]);
+    dispatch(setIsMedicalRecordComplete(MedicalRecordInfoFormComplete));
     }
     
   const infoRedIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="w-4 h-4 ">
@@ -40,16 +37,16 @@ const MedicalRecords = () => {
             <div className='flex w-full items-center'>
               <div className="w-full flex flex-col">
                 <label className='text-base font-semibold'>Select Bloodtype</label>
-                <select id="bloodType" value={medicalRecord.bloodType} onChange={changeHandler}
+                <select id="bloodType" value={medicalRecordInfo.bloodType} onChange={changeHandler}
                   name="bloodType" className={`bg-gray-50 outline  text-gray-900 
-                text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isClick && !personalInfo.fullName ? 'outline-red-400' : 'outline-gray-300'} `}>
+                text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isMedicalRecordClick && !medicalRecordInfo.bloodType? 'outline-red-400' : 'outline-gray-300'} `}>
                     <option value="">Blood type</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="AB">AB</option>
                     <option value="O">O</option>
                 </select>
-                { isClick && !medicalRecord.bloodType ? <div className='w-full flex items-center mt-1 gap-1'> 
+                { isMedicalRecordClick && !medicalRecordInfo.bloodType? <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please select your bloodtype</span>
                 </div>
@@ -61,11 +58,12 @@ const MedicalRecords = () => {
                 }
               </div>
             </div>
-          </div>
+          </div> 
         </div>
-        {/* <div className="max-w-screen-md mx-auto mt-8 text-right">
-            <Button type="submit">Submit</Button>
-        </div> */}
+
+        <div className="max-w-screen-md mx-auto mt-8 text-right">
+            <Button onClick={clickHandler}>Submit</Button>
+        </div>
     </>
   )
 }

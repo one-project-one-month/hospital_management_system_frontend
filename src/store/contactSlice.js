@@ -20,11 +20,11 @@ const contactSlice = createSlice({
     setIsContactFormComplete: (state, action) => {
       state.isFormComplete = action.payload;
     },
-    setContactIsClick: (state, action) => {
+    setIsContactFormClick: (state, action) => {
       state.isClick = action.payload;
     }
   }
 });
 
-export const { setContactInfo, setIsContactFormComplete, setContactIsClick } = contactSlice.actions;
+export const { setContactInfo, setIsContactFormComplete, setIsContactFormClick } = contactSlice.actions;
 export default contactSlice.reducer;
