@@ -1,0 +1,33 @@
+{
+  "patients": [
+    {
+      "fullName": "Ko Hla Shwe",
+      "gender": "M",
+      "phoneNumber": "09123456789",
+      "email": "kohlashwe@gmail.com",
+      "bloodType": "O",
+      "dateOfBirth": "1999-07-2017",
+      "address": "No(14),Pyin Oo Lwin,Mandalay"
+    },
+    {
+      "id": "6f51",
+      "fullName": "Kyaw Htet Aung",
+      "dateOfBirth": "2024-03-28",
+      "gender": "male",
+      "phoneNumber": "09892108660",
+      "email": "kyawhtetaung69@gmail.com",
+      "address": "Mandalay",
+      "bloodType": "B"
+    },
+    {
+      "id": "f5ac",
+      "fullName": "Htet Nadi Hlaing",
+      "dateOfBirth": "2024-03-21",
+      "gender": "female",
+      "phoneNumber": "097846123",
+      "email": "htet9989@gmail.com",
+      "address": "Taunggyi",
+      "bloodType": "O"
+    }
+  ]
+}

@@ -7,7 +7,6 @@ import { setContactInfo, setIsContactFormComplete, setIsContactFormClick } from 
 
 const Contactinfo = () => {
   const contactInfo = useSelector(state => state.contact.contactInfo);
-  const isContactFormComplete = useSelector(state => state.contact.isFormComplete);
   const isContactFormClick = useSelector(state => state.contact.isClick);
   const dispatch = useDispatch();
   

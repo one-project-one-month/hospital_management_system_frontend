@@ -3,23 +3,23 @@ import { useState } from 'react';
 import Steppers from './Steppers'
 import { Button } from '@/components/ui/button';
 import { useSelector,useDispatch } from 'react-redux';
-import {setMedicalRecordInfo,setIsMedicalRecordComplete,setIsMedicalRecordClick} from '../../store/medicalRecordSlice'
+import {setMedicalRecordInfo,setIsMedicalRecordComplete} from '../../store/medicalRecordSlice'
+import { useEffect } from 'react';
 
 const MedicalRecords = () => {
     const medicalRecordInfo = useSelector(state => state.medicalRecord.medicalRecordInfo);
     const isMedicalRecordClick = useSelector(state => state.medicalRecord.isClick);
     const dispatch = useDispatch();
-    console.log(isMedicalRecordClick)
-  const changeHandler = (e) => {
-   const {name,value} = e.target;
-   dispatch(setMedicalRecordInfo({ [name] : value }));
+
+    const changeHandler = (e) => {
+     const {name,value} = e.target;
+     dispatch(setMedicalRecordInfo({ [name] : value }));
   }
-      
-  const clickHandler = () => {
-    dispatch(setIsMedicalRecordClick(true));
+
+  useEffect(()=>{
     const MedicalRecordInfoFormComplete = Object.keys(medicalRecordInfo).every(key => medicalRecordInfo[key]);
-    dispatch(setIsMedicalRecordComplete(MedicalRecordInfoFormComplete));
-    }
+    dispatch(setIsMedicalRecordComplete(MedicalRecordInfoFormComplete))
+  },[medicalRecordInfo])
     
   const infoRedIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="w-4 h-4 ">
     <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
@@ -61,9 +61,9 @@ const MedicalRecords = () => {
           </div> 
         </div>
 
-        <div className="max-w-screen-md mx-auto mt-8 text-right">
+        {/* <div className="max-w-screen-md mx-auto mt-8 text-right">
             <Button onClick={clickHandler}>Submit</Button>
-        </div>
+        </div> */}
     </>
   )
 }

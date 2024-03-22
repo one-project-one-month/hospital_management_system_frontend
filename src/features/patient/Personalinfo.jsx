@@ -9,7 +9,6 @@ import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } fr
 
 const Personalinfo = () => {
   const personalInfo = useSelector(state => state.form.personalInfo);
-  const isPersonalFormComplete = useSelector(state => state.form.isFormComplete);
   const isPersonalFormClick = useSelector(state => state.form.isClick);
   const dispatch = useDispatch();
 
