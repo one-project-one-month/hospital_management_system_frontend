@@ -15,8 +15,8 @@ export default function Header() {
       setCurLocation("Home")
       return
     }
-    setCurLocation(state.title)
-  })
+    setCurLocation(state?.title || '')
+  },[state, pathname])
 
   return (
     <header className=" py-3 px-4 border-b border-b-neutral-200 flex items-center justify-between divide-x divide-neutral-100 dark:divide-neutral-700 dark:border-b-neutral-700">
