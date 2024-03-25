@@ -19,26 +19,6 @@
       "email": "kyawhtetaung69@gmail.com",
       "address": "Mandalay",
       "bloodType": "B"
-    },
-    {
-      "id": "f5ac",
-      "fullName": "Htet Nadi Hlaing",
-      "dateOfBirth": "2024-03-21",
-      "gender": "female",
-      "phoneNumber": "097846123",
-      "email": "htet9989@gmail.com",
-      "address": "Taunggyi",
-      "bloodType": "O"
-    },
-    {
-      "id": "2a89",
-      "fullName": "kha",
-      "dateOfBirth": "2024-03-27",
-      "gender": "male",
-      "phoneNumber": "0987787822",
-      "email": "maung@gmail.com",
-      "address": "Mdy",
-      "bloodType": "A"
     }
   ]
 }

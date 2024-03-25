@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Steppers from './Steppers'
 import { Button } from '@/components/ui/button';
 import { useSelector,useDispatch } from 'react-redux';
-import {setMedicalRecordInfo,setIsMedicalRecordComplete} from '../../store/medicalRecordSlice'
+import {setMedicalRecordInfo,setIsMedicalRecordComplete} from '../../store/patient/medicalRecordSlice'
 import { useEffect } from 'react';
 
 const MedicalRecords = () => {
@@ -34,11 +34,11 @@ const MedicalRecords = () => {
   return (
     <>
         <div className="max-w-screen-lg mx-auto mt-6 ">
-          <h4 className="text-lg font-bold">Medical record</h4>
+          <h4 className="text-lg font-bold text-black">Medical record</h4>
           <div className='flex flex-col items-center gap-6 w-full mx-auto mt-3 p-3'>
             <div className='flex w-full items-center'>
               <div className="w-full flex flex-col">
-                <label className='text-base font-semibold'>Select Bloodtype</label>
+                <label className='text-base font-semibold text-black'>Select Bloodtype</label>
                 <select id="bloodType" value={medicalRecordInfo.bloodType} onChange={changeHandler}
                   name="bloodType" className={`bg-gray-50 outline  text-gray-900 
                 text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isMedicalRecordClick && !medicalRecordInfo.bloodType? 'outline-red-400' : 'outline-gray-300'} `}>
@@ -62,10 +62,6 @@ const MedicalRecords = () => {
             </div>
           </div> 
         </div>
-
-        {/* <div className="max-w-screen-md mx-auto mt-8 text-right">
-            <Button onClick={clickHandler}>Submit</Button>
-        </div> */}
     </>
   )
 }

@@ -28,7 +28,7 @@ import React from 'react'
               <p className="text-xs text-gray-400">{isContactFormClick && isContactFormComplete ? `Completed` : `Pending`}</p>
             </div>
           </div>
-          <div className="w-[36%]">
+          <div className="w-[37%]">
             <div className="flex items-center">
               <div className={`w-8 h-8 shrink-0 mx-[-1px] ${isMedicalRecordClick && isMedicalRecordComplete && response? `bg-blue-600` :`bg-gray-300`} p-1.5 flex items-center justify-center rounded-full`}>
                 <span className="text-base text-white font-bold">3</span>

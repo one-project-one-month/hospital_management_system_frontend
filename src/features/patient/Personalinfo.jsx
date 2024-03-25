@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import Steppers from './Steppers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } from '../../store/form';
+import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } from '../../store/patient/form';
 
 
 
@@ -35,11 +35,11 @@ const Personalinfo = () => {
   return (
     <>
       <div className="max-w-screen-lg mx-auto mt-6 ">
-          <h4 className="text-lg font-bold">Personal info</h4>
+          <h4 className="text-lg font-bold text-black">Personal info</h4>
           <div className='flex flex-col items-center gap-6 w-full mx-auto mt-3 p-3'>
             <div className='flex w-full items-center'>
               <div className='w-full flex flex-col'>
-                <label className='text-base font-semibold'>Full name</label>
+                <label className='text-base font-semibold text-black'>Full name</label>
                 <input 
                   type="text" 
                   name="fullName" 
@@ -63,7 +63,7 @@ const Personalinfo = () => {
                 )}
               </div>
               <div className='w-full flex flex-col'>
-                <label className='text-base font-semibold'>Date of birth</label>
+                <label className='text-base font-semibold text-black'>Date of birth</label>
                 <input 
                   type="date" 
                   name="dateOfBirth" 
@@ -86,7 +86,7 @@ const Personalinfo = () => {
               </div>
             </div>
               <div className="w-full flex flex-col">
-                <label className='text-base font-semibold'>Select Gender</label>
+                <label className='text-base font-semibold text-black'>Select Gender</label>
                 <select id="gender" value={personalInfo.gender} onChange={changeHandler}
                   name="gender" className={`bg-gray-50 outline  text-gray-900 
                 text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isPersonalFormClick && !personalInfo.gender ? 'outline-red-400' : 'outline-gray-300'} `}>
@@ -109,7 +109,7 @@ const Personalinfo = () => {
           </div>
       </div>
       <div className="max-w-screen-md mx-auto mt-8 text-right">
-        <Button onClick={clickHandler} type='button' >Next</Button>
+        <Button onClick={clickHandler} type='button' className=' text-white' >Next</Button>
       </div>
     </>
 

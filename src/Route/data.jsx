@@ -1,6 +1,7 @@
 import NotFound from '@/components/NotFound/NotFound.jsx'
 import Main from '../Layout/Main/Main.jsx'
 import { Home } from '../Pages/Home/Home.jsx'
+import Pateint from '@/features/patient/Pateint.jsx'
 
 export const routes = [
     {
@@ -30,7 +31,7 @@ export const routes = [
                 children: [
                     {
                         index: true,
-                        element: <h1>Patient List</h1>
+                        element: <Pateint/>
                     },
                     {
                         path: "medicalRecords",

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import {setIsMedicalRecordClick} from '../../store/medicalRecordSlice'
+import {setIsMedicalRecordClick} from '../../store/patient/medicalRecordSlice'
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast,Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -72,8 +72,7 @@ const Pateint = () => {
   return (
     <form onSubmit={handleSubmit} className='w-full h-screen bg-blue-100 px-[100px] py-[40px]'>
       <div className='bg-white w-full h-full rounded-xl p-8'>
-        <div className='text-center font-bold text-xl'>Patient Registration</div>
-        {/* <div className='text-center text-red-400 mt-2 text-sm'>Please fill in patients' informations</div> */}
+        <div className='text-center font-bold text-xl text-black'>Patient Registration</div>
 
         <Steppers isPersonalFormClick={isPersonalFormClick} isPersonalFormComplete={isPersonalFormComplete} isContactFormClick={isContactFormClick} isContactFormComplete={isContactFormComplete} isMedicalRecordClick={isMedicalRecordClick} isMedicalRecordComplete={isMedicalRecordComplete}
         response={response}/>
@@ -85,7 +84,7 @@ const Pateint = () => {
         {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <MedicalRecords/>}
 
         {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <div className="max-w-screen-md mx-auto mt-8 text-right">
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' className='text-white'>Submit</Button>
         </div>
         }
         <ToastContainer/>

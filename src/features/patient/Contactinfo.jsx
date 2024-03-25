@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Steppers from './Steppers';
 import { Button } from '@/components/ui/button';
 import { useDispatch, useSelector } from 'react-redux';
-import { setContactInfo, setIsContactFormComplete, setIsContactFormClick } from '../../store/contactSlice';
+import { setContactInfo, setIsContactFormComplete, setIsContactFormClick } from '../../store/patient/contactSlice';
 
 const Contactinfo = () => {
   const contactInfo = useSelector(state => state.contact.contactInfo);
@@ -32,11 +32,11 @@ const Contactinfo = () => {
   return (
     <>  
         <div className="max-w-screen-lg mx-auto mt-6 ">
-          <h4 className="text-lg font-bold">Contact info</h4>
+          <h4 className="text-lg font-bold text-black">Contact info</h4>
           <div className='flex flex-col items-center gap-6 w-full mx-auto mt-3 p-3'>
             <div className='flex w-full items-center'>
               <div className='w-full flex flex-col'>
-                <label className='text-base font-semibold'>Phone number</label>
+                <label className='text-base font-semibold text-black'>Phone number</label>
                 <input 
                   type="text" 
                   name="phoneNumber" 
@@ -59,7 +59,7 @@ const Contactinfo = () => {
                 }
               </div>
               <div className='w-full flex flex-col'>
-                <label className='text-base font-semibold'>Email</label>
+                <label className='text-base font-semibold text-black'>Email</label>
                 <input 
                   type="text" 
                   name="email" 
@@ -83,7 +83,7 @@ const Contactinfo = () => {
               </div>
             </div>
               <div className="w-full flex flex-col">
-                <label className='text-base font-semibold'>Address</label>
+                <label className='text-base font-semibold text-black'>Address</label>
                 <input 
                   type="text" 
                   name="address" 
@@ -109,7 +109,7 @@ const Contactinfo = () => {
         </div>
 
         <div className="max-w-screen-md mx-auto mt-8 text-right">
-            <Button onClick={clickHandler} type='button' >Next</Button>
+            <Button onClick={clickHandler} type='button' className='text-white' >Next</Button>
         </div>
     </>
   )

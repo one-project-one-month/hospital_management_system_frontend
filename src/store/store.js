@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import formReducer from './form'
-import contactReducer from './contactSlice'
-import medicalRecordReducer from './medicalRecordSlice'
+import formReducer from './patient/form'
+import contactReducer from './patient/contactSlice'
+import medicalRecordReducer from './patient/medicalRecordSlice'
 
 const store = configureStore({
   reducer: {
