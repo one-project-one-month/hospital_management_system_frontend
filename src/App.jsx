@@ -1,12 +1,11 @@
 import './App.css'
-import Main from './Layout/Main/Main'
+import { View } from './Route/View'
 
 function App() {
 
   return (
     <>
-      <Main>
-      </Main>
+      <View/>
     </>
   )
 }
