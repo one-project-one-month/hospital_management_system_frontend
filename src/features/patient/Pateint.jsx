@@ -15,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import SuccessFull from './SuccessFull';
 
 const Pateint = () => {
-  console.log(ToastContainer);
   const isPersonalFormComplete = useSelector(state => state.form.isFormComplete);
   const isPersonalFormClick = useSelector(state => state.form.isClick);
   const personalForm = useSelector(state => state.form.personalInfo)
@@ -54,6 +53,7 @@ const Pateint = () => {
 };
 
   const handleSubmit = async(e) => {
+    console.log('gh');
     e.preventDefault();
     dispatch(setIsMedicalRecordClick(true));
     if (Object.keys(combinedDatas).length !== 0) {
@@ -85,7 +85,7 @@ const Pateint = () => {
         {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <MedicalRecords/>}
 
         {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <div className="max-w-screen-md mx-auto mt-8 text-right">
-          <Button>Submit</Button>
+          <Button type='submit'>Submit</Button>
         </div>
         }
         <ToastContainer/>

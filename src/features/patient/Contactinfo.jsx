@@ -109,7 +109,7 @@ const Contactinfo = () => {
         </div>
 
         <div className="max-w-screen-md mx-auto mt-8 text-right">
-            <Button onClick={clickHandler} >Next</Button>
+            <Button onClick={clickHandler} type='button' >Next</Button>
         </div>
     </>
   )
