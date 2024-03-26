@@ -69,15 +69,15 @@ const Pateint = () => {
     } 
   }
 
-  // useEffect(()=>{
-  //   document.body.style.overflow = "hidden";
-  //   return () => {
-  //     document.body.style.overflow='scroll'
-  //   }
-  // },[])
+  useEffect(()=>{
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow='scroll'
+    }
+  },[])
 
   return (
-    <form onSubmit={handleSubmit} className='w-full max-h-screen bg-blue-100 px-[80px] py-[40px]'>
+    <form onSubmit={handleSubmit} className='w-full h-full bg-blue-100 mx-auto px-[60px] py-[75px]'>
       <div className='bg-white w-full h-fit rounded-xl p-8'>
         <div className='text-center font-bold text-xl text-black'>Patient Registration</div>
 
