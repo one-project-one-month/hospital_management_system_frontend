@@ -3,6 +3,9 @@ import Main from '../Layout/Main/Main.jsx'
 import { Home } from '../Pages/Home/Home.jsx'
 import Appointment from '@/Pages/Appointment/Appointment.jsx'
 import AddAppointment from '@/Pages/Appointment/AddAppointment.jsx'
+import Pateint from '@/features/patient/Pateint.jsx'
+import Room from '@/Pages/Room/Room.jsx'
+import Disease from '@/Pages/Disease/Disease.jsx'
 
 export const routes = [
     {
@@ -24,6 +27,10 @@ export const routes = [
                     {
                         path: "doctorSpecialist",
                         element: <h1>Doctor Specialist</h1>,
+                    },
+                    {
+                        path: "/Disease",
+                        element: <Disease />,
                     }
                 ]
             },
@@ -32,11 +39,15 @@ export const routes = [
                 children: [
                     {
                         index: true,
-                        element: <h1>Patient List</h1>
+                        Component: Pateint
                     },
                     {
                         path: "medicalRecords",
                         element: <h1>Medical Records</h1>,
+                    },
+                    {
+                        path: "/Room",
+                        element: <Room />,
                     }
                 ]
             },
@@ -52,7 +63,8 @@ export const routes = [
                         Component:AddAppointment
                     }
                 ]
-            }
+            },
+            
         ]
     },
 ]
