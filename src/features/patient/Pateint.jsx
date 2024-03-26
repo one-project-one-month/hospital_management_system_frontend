@@ -69,9 +69,16 @@ const Pateint = () => {
     } 
   }
 
+  // useEffect(()=>{
+  //   document.body.style.overflow = "hidden";
+  //   return () => {
+  //     document.body.style.overflow='scroll'
+  //   }
+  // },[])
+
   return (
-    <form onSubmit={handleSubmit} className='w-full h-screen bg-blue-100 px-[100px] py-[40px]'>
-      <div className='bg-white w-full h-full rounded-xl p-8'>
+    <form onSubmit={handleSubmit} className='w-full max-h-screen bg-blue-100 px-[80px] py-[40px]'>
+      <div className='bg-white w-full h-fit rounded-xl p-8'>
         <div className='text-center font-bold text-xl text-black'>Patient Registration</div>
 
         <Steppers isPersonalFormClick={isPersonalFormClick} isPersonalFormComplete={isPersonalFormComplete} isContactFormClick={isContactFormClick} isContactFormComplete={isContactFormComplete} isMedicalRecordClick={isMedicalRecordClick} isMedicalRecordComplete={isMedicalRecordComplete}
