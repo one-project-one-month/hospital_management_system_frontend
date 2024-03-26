@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+
 import { Home, Stethoscope, Bed, ChevronsUpDown } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,15 @@ const navLinks = [
     nested: [
       { title: "Patient List", url: "/patient"},
       { title: "Medical Records", url: "/patient/medicalRecords" },
+    ],
+  },
+  {
+    title: "Appointment",
+    icon: <Bed size={16} />,
+    url: "/appointment",
+    nested: [
+      { title: "Appointment", url: "/appointment"},
+      {title:"AddAppointment ", url:"/appointment/add"}
     ],
   },
 ];

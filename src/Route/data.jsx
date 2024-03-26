@@ -1,6 +1,8 @@
 import NotFound from '@/components/NotFound/NotFound.jsx'
 import Main from '../Layout/Main/Main.jsx'
 import { Home } from '../Pages/Home/Home.jsx'
+import Appointment from '@/Pages/Appointment/Appointment.jsx'
+import AddAppointment from '@/Pages/Appointment/AddAppointment.jsx'
 
 export const routes = [
 
@@ -42,6 +44,19 @@ export const routes = [
                         path: "medicalRecords",
                         handle: {title: "Medical Records"},
                         element: <h1>Medical Records</h1>,
+                    }
+                ]
+            },
+            {
+                path: "appointment",
+                children: [
+                    {
+                        index: true,
+                        Component:Appointment
+                    },
+                    {
+                        path:"/appointment/add",
+                        Component:AddAppointment
                     }
                 ]
             }
