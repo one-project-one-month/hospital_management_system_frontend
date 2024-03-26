@@ -1,12 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
-import Steppers from './Steppers'
-import { Button } from '@/components/ui/button';
 import { useSelector,useDispatch } from 'react-redux';
 import {setMedicalRecordInfo,setIsMedicalRecordComplete} from '../../store/patient/medicalRecordSlice'
 import { useEffect } from 'react';
 
-const MedicalRecords = () => {
+const MedicalRecord = () => {
     const medicalRecordInfo = useSelector(state => state.medicalRecord.medicalRecordInfo);
     const isMedicalRecordClick = useSelector(state => state.medicalRecord.isClick);
     const dispatch = useDispatch();
@@ -34,7 +31,7 @@ const MedicalRecords = () => {
   return (
     <>
         <div className="max-w-screen-lg mx-auto mt-6 ">
-          <h4 className="text-lg font-bold text-black">Medical record</h4>
+          <h4 className="text-lg font-bold text-black">Medical Record</h4>
           <div className='flex flex-col items-center gap-6 w-full mx-auto mt-3 p-3'>
             <div className='flex w-full items-center'>
               <div className="w-full flex flex-col">
@@ -66,4 +63,4 @@ const MedicalRecords = () => {
   )
 }
 
-export default MedicalRecords
+export default MedicalRecord

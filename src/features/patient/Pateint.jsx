@@ -1,7 +1,7 @@
 import React from 'react'
 import Steppers from './Steppers'
 import Personalinfo from './Personalinfo'
-import MedicalRecords from './MedicalRecords'
+import MedicalRecord from './MedicalRecord'
 import { useSelector } from 'react-redux';
 import Contactinfo from './Contactinfo';
 import { Button } from '@/components/ui/button';
@@ -12,7 +12,6 @@ import {setIsMedicalRecordClick} from '../../store/patient/medicalRecordSlice'
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast,Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SuccessFull from './SuccessFull';
 
 const Pateint = () => {
   const isPersonalFormComplete = useSelector(state => state.form.isFormComplete);
@@ -27,8 +26,7 @@ const Pateint = () => {
   const [response, setResponse] = useState(false)
 
   const [combinedDatas,setCombinedDatas] = useState ({});
-  // console.log(isMedicalRecordClick)
-  // console.log(medicalRecord.bloodType);
+
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -53,7 +51,6 @@ const Pateint = () => {
 };
 
   const handleSubmit = async(e) => {
-    console.log('gh');
     e.preventDefault();
     dispatch(setIsMedicalRecordClick(true));
     if (Object.keys(combinedDatas).length !== 0) {
@@ -88,7 +85,7 @@ const Pateint = () => {
 
         {isPersonalFormClick && isPersonalFormComplete && !isContactFormComplete && !isMedicalRecordComplete && <Contactinfo/> }
 
-        {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <MedicalRecords/>}
+        {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <MedicalRecord/>}
 
         {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <div className="max-w-screen-md mx-auto mt-8 text-right">
           <Button type='submit' className='text-white'>Submit</Button>

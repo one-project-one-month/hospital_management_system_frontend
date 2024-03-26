@@ -5,8 +5,6 @@ import Steppers from './Steppers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } from '../../store/patient/form';
 
-
-
 const Personalinfo = () => {
   const personalInfo = useSelector(state => state.form.personalInfo);
   const isPersonalFormClick = useSelector(state => state.form.isClick);
