@@ -3,9 +3,11 @@ import Main from '../Layout/Main/Main.jsx'
 import { Home } from '../Pages/Home/Home.jsx'
 
 export const routes = [
+
     {
         path: "/",
         Component: Main,
+        handle: {title: "Home"},
         errorElement: <NotFound/>,
         children: [
             {
@@ -14,6 +16,7 @@ export const routes = [
             },
             {
                 path: "doctor",
+                handle: {title: "Doctor"},
                 children: [
                     {
                         index: true,
@@ -22,18 +25,22 @@ export const routes = [
                     {
                         path: "doctorSpecialist",
                         element: <h1>Doctor Specialist</h1>,
+                        handle: {title: "Doctor Specialist"},
                     }
                 ]
             },
             {
                 path: "patient",
+                handle: {title: "Patient"},
                 children: [
                     {
                         index: true,
-                        element: <h1>Patient List</h1>
+                        element: <h1>Patient List</h1>,
+                        handle: {title: "Home"},
                     },
                     {
                         path: "medicalRecords",
+                        handle: {title: "Medical Records"},
                         element: <h1>Medical Records</h1>,
                     }
                 ]

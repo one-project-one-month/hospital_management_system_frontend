@@ -65,7 +65,6 @@ function NavLinkButton({ title, url, icon, nested }) {
     >
       <NavLink
         onClick={dropDownToggle}
-        state={{title}}
         to={url}
         className={({ isActive }) =>
           cn(
@@ -84,7 +83,6 @@ function NavLinkButton({ title, url, icon, nested }) {
           {nested.map(({title, url}, id) => {
             return (
               <NavLink
-              state={{title}}
               key={id}
                 className={({ isActive }) =>
                   cn(linkStyle, {
