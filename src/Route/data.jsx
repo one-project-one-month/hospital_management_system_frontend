@@ -3,9 +3,11 @@ import Main from '../Layout/Main/Main.jsx'
 import { Home } from '../Pages/Home/Home.jsx'
 import Appointment from '@/Pages/Appointment/Appointment.jsx'
 import AddAppointment from '@/Pages/Appointment/AddAppointment.jsx'
-import Pateint from '@/features/patient/Pateint.jsx'
+import Pateint from '@/Pages/patient/Pateint.jsx'
 import Room from '@/Pages/Room/Room.jsx'
 import Disease from '@/Pages/Disease/Disease.jsx'
+import Doctor from '@/Pages/Doctor/Doctor.jsx'
+import DoctorSpecialist from '@/Pages/DoctorSpecialist/DoctorSpecialist.jsx'
 
 export const routes = [
     {
@@ -22,16 +24,12 @@ export const routes = [
                 children: [
                     {
                         index: true,
-                        element: <h1>Doctor List</h1>,
+                        Component: Doctor 
                     },
                     {
                         path: "doctorSpecialist",
-                        element: <h1>Doctor Specialist</h1>,
+                        Component:DoctorSpecialist,
                     },
-                    {
-                        path: "/Disease",
-                        element: <Disease />,
-                    }
                 ]
             },
             {
@@ -45,10 +43,6 @@ export const routes = [
                         path: "medicalRecords",
                         element: <h1>Medical Records</h1>,
                     },
-                    {
-                        path: "/Room",
-                        element: <Room />,
-                    }
                 ]
             },
             {
@@ -61,6 +55,19 @@ export const routes = [
                     {
                         path:"/appointment/add",
                         Component:AddAppointment
+                    }
+                ]
+            },
+            {
+                path: "room",
+                children: [
+                    {
+                        index: true,
+                        Component:Room
+                    },
+                    {
+                        path:"disease",
+                        Component:Disease
                     }
                 ]
             },

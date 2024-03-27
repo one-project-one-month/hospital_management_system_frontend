@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import Steppers from './Steppers'
 import Personalinfo from './Personalinfo'
@@ -10,8 +12,10 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import {setIsMedicalRecordClick} from '../../store/medicalRecordSlice'
 import { useDispatch } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
 import { ToastContainer, toast,Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// eslint-disable-next-line no-unused-vars
 import SuccessFull from './SuccessFull';
 
 const Pateint = () => {
@@ -35,6 +39,7 @@ const Pateint = () => {
     if(isPersonalFormComplete && isContactFormComplete && isMedicalRecordComplete && medicalRecord.bloodType ) {
       setCombinedDatas({...personalForm,...contactForm,...medicalRecord})
     }
+  // eslint-disable-next-line no-sparse-arrays
   },[,isContactFormComplete, isPersonalFormComplete,isMedicalRecordComplete,medicalRecord])
 
   const showSuccessToast = (message) => {
@@ -70,7 +75,7 @@ const Pateint = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='w-full h-screen bg-blue-100 px-[100px] py-[40px]'>
+    <form onSubmit={handleSubmit} className='w-[100%] h-[91%] bg-blue-100 px-[100px] py-[40px]'>
       <div className='bg-white w-full h-full rounded-xl p-8'>
         <div className='text-center font-bold text-xl'>Patient Registration</div>
         {/* <div className='text-center text-red-400 mt-2 text-sm'>Please fill in patients' informations</div> */}

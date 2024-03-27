@@ -1,10 +1,11 @@
-import Users from "../../features/users/users"
+import DashboardTable from "@/components/Dashboard/DashboardTable"
+import Dashboard from "@/components/Dashboard/Dashboard"
 
 export const Home = () => {
   return (
-    <div>
-
-      <Users />
-    </div>
+    <>
+      <Dashboard />
+      <DashboardTable />
+    </>
   )
 }

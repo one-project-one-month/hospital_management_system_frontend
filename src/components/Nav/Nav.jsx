@@ -30,8 +30,17 @@ const navLinks = [
     icon: <Bed size={16} />,
     url: "/appointment",
     nested: [
-      { title: "Appointment", url: "/appointment"},
-      {title:"AddAppointment ", url:"/appointment/add"}
+      { title: "Appointment List", url: "/appointment"},
+      {title:"New Appointment ", url:"/appointment/add"}
+    ],
+  },
+  {
+    title: "Setup",
+    icon: <Bed size={16} />,
+    url: "/room",
+    nested: [
+      { title: "Room", url: "/room"},
+      {title:"Disease ", url:"/room/disease"}
     ],
   },
 ];

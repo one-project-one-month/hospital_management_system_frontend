@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import './style.module.css'
 import { Label } from "@/components/ui/label"
@@ -25,12 +26,16 @@ import {
 } from "@/components/ui/table"
 
 
-export const Room = () => {
+ const Room = () => {
   return (
     <>
     <Card>
   <CardHeader>
-    <CardTitle> <h1>Room Setup</h1></CardTitle>
+    <CardTitle> 
+      <div>
+        <h1>Room Setup</h1>
+      </div>
+    </CardTitle>
     <CardDescription></CardDescription>
   </CardHeader>
   <CardContent>
@@ -38,8 +43,7 @@ export const Room = () => {
       <Label htmlFor="roomeName">Room Name</Label>
       <Input ></Input><br/>
       <Button>Save</Button>
-   
-    </div>  
+  </div>  
     <Table>
   <TableCaption></TableCaption>
   <TableHeader>
@@ -75,7 +79,7 @@ export const Room = () => {
   <CardFooter>
   <Link to="../" className={buttonVariants({ variant: "outline" })}>Back</Link>
   </CardFooter>
-</Card>
+  </Card>
       
    
 
@@ -88,3 +92,4 @@ export const Room = () => {
 
   )
 }
+export default Room
