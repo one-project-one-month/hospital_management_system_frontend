@@ -6,6 +6,7 @@ import AddAppointment from "@/Pages/Appointment/AddAppointment.jsx";
 import Pateint from "@/features/patient/Pateint.jsx";
 import Room from "@/Pages/Room/Room.jsx";
 import Disease from "@/Pages/Disease/Disease.jsx";
+import DoctorContainer from "@/Pages/Doctor/Doctor.jsx";
 
 export const routes = [
   {
@@ -22,7 +23,7 @@ export const routes = [
         children: [
           {
             index: true,
-            element: <h1>Doctor List</h1>,
+            Component: DoctorContainer,
           },
           {
             path: "doctorSpecialist",
