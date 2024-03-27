@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import Steppers from './Steppers'
 import Personalinfo from './Personalinfo'
@@ -10,8 +12,14 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import {setIsHealthProfileClick} from '../../store/patient/healthProfile'
 import { useDispatch } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
 import { ToastContainer, toast,Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+<<<<<<< HEAD:src/features/patient/Pateint.jsx
+=======
+// eslint-disable-next-line no-unused-vars
+import SuccessFull from './SuccessFull';
+>>>>>>> upstream/main:src/Pages/patient/Pateint.jsx
 
 const Pateint = () => {
   const isPersonalFormComplete = useSelector(state => state.form.isFormComplete);
@@ -35,7 +43,27 @@ const Pateint = () => {
     if(isPersonalFormComplete && isContactFormComplete && isHealthProfileComplete && healthProfile.bloodType ) {
       setCombinedDatas({name:personalForm.name,gender : personalForm.gender,phoneNumber : contactForm.phoneNumber,email:contactForm.email,bloodType : healthProfile.bloodType,birthDate : isoBirthDate,address : contactForm.address})
     }
+<<<<<<< HEAD:src/features/patient/Pateint.jsx
   },[,isContactFormComplete, isPersonalFormComplete,isHealthProfileComplete,healthProfile])
+=======
+  // eslint-disable-next-line no-sparse-arrays
+  },[,isContactFormComplete, isPersonalFormComplete,isMedicalRecordComplete,medicalRecord])
+
+  const showSuccessToast = (message) => {
+    toast.success(message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnFocusLoss: true,
+        draggable: true,
+        pauseOnHover: true,
+        theme: "light",
+    });
+};
+>>>>>>> upstream/main:src/Pages/patient/Pateint.jsx
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -60,12 +88,20 @@ const Pateint = () => {
     } 
   }
 
+<<<<<<< HEAD:src/features/patient/Pateint.jsx
   useEffect(()=>{
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow='scroll'
     }
   },[])
+=======
+  return (
+    <form onSubmit={handleSubmit} className='w-[100%] h-[91%] bg-blue-100 px-[100px] py-[40px]'>
+      <div className='bg-white w-full h-full rounded-xl p-8'>
+        <div className='text-center font-bold text-xl'>Patient Registration</div>
+        {/* <div className='text-center text-red-400 mt-2 text-sm'>Please fill in patients' informations</div> */}
+>>>>>>> upstream/main:src/Pages/patient/Pateint.jsx
 
   return (
     <form onSubmit={handleSubmit} className='w-full h-full bg-blue-100 mx-auto px-[60px] py-[70px] '>

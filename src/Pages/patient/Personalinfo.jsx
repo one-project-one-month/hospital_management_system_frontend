@@ -1,6 +1,14 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { Button } from '@/components/ui/button'
+<<<<<<< HEAD:src/features/patient/Personalinfo.jsx
 import { useState,useEffect} from 'react'
+=======
+// eslint-disable-next-line no-unused-vars
+import { useState } from 'react'
+// eslint-disable-next-line no-unused-vars
+import Steppers from './Steppers';
+>>>>>>> upstream/main:src/Pages/patient/Personalinfo.jsx
 import { useDispatch, useSelector } from 'react-redux';
 import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } from '../../store/patient/form';
 import axios from 'axios';
