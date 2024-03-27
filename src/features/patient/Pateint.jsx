@@ -37,33 +37,24 @@ const Pateint = () => {
     }
   },[,isContactFormComplete, isPersonalFormComplete,isHealthProfileComplete,healthProfile])
 
-  const showSuccessToast = (message) => {
-    toast.success(message, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        newestOnTop: false,
-        closeOnClick: true,
-        rtl: false,
-        pauseOnFocusLoss: true,
-        draggable: true,
-        pauseOnHover: true,
-        theme: "light",
-    });
-};
-
   const handleSubmit = async(e) => {
     e.preventDefault();
     dispatch(setIsHealthProfileClick(true));
     if (Object.keys(combinedDatas).length !== 0) {
       try {
-        const res = await axios.post('https://hospital-management-system-backend-7fee.vercel.app/api/v1/patients', combinedDatas);
-        console.log(res);
-        if(res.status === 201) {
-          showSuccessToast('Successfully added a pateint')
-          setResponse(true);
+        const response = await toast.promise(
+          axios.post('http://localhost:3001/patients', combinedDatas),
+          {
+            pending: 'Adding in progress,please wait...',
+            success: 'Successfully added a pateint',
+            error: 'Server error'
+          }
+        );
+        if(response.status >= 200 && response.status < 300) {
+         setResponse(true)
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.log(error);
       }
     } 
@@ -94,7 +85,18 @@ const Pateint = () => {
           <Button type='submit' className='text-white'>Submit</Button>
         </div>
         }
-        <ToastContainer/>
+        <ToastContainer 
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition: Bounce />
       </div>
     </form>
   )

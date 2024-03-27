@@ -35,7 +35,7 @@ import React from 'react'
               </div>
             </div>
             <div className="mt-2">
-              <h6 className="text-base font-semibold text-blue-500">Medical Record</h6>
+              <h6 className="text-base font-semibold text-blue-500">Health Profile</h6>
               <p className="text-xs text-gray-400">{isMedicalRecordClick && isMedicalRecordComplete && response ? `Completed` : `Pending`}</p>
             </div>
           </div>
