@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Home, Stethoscope, Bed, ChevronsUpDown } from "lucide-react";
+import { Home, Stethoscope, Bed, ChevronsUpDown, BadgeCheck } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -14,6 +14,7 @@ const navLinks = [
     nested: [
       { title: "Doctor List", url: "/doctor"},
       { title: "Doctor Specialist", url: "/doctor/doctorSpecialist" },
+      { title: "Disease", url: "/doctor/disease"}
     ],
   },
   {
@@ -27,11 +28,20 @@ const navLinks = [
   },
   {
     title: "Appointment",
-    icon: <Bed size={16} />,
+    icon: <BadgeCheck size={16} />,
     url: "/appointment",
     nested: [
-      { title: "Appointment", url: "/appointment"},
-      {title:"AddAppointment ", url:"/appointment/add"}
+      { title: "Appointment List", url: "/appointment"},
+      {title:"New Appointment ", url:"/appointment/add"}
+    ],
+  },
+  {
+    title: "Setup",
+    icon: <Bed size={16} />,
+    url: "/room",
+    nested: [
+      { title: "Room", url: "/room"},
+      {title:"Disease ", url:"/room/disease"}
     ],
   },
 ];
@@ -70,7 +80,7 @@ function NavLinkButton({ title, url, icon, nested }) {
     <div
       className={cn(
         "max-h-8 overflow-hidden transition-all ease-out duration-150",
-        { "max-h-28": isOpen }
+        { "max-h-40": isOpen }
       )}
     >
       <NavLink

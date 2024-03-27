@@ -1,6 +1,9 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { Button } from '@/components/ui/button'
+// eslint-disable-next-line no-unused-vars
 import { useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import Steppers from './Steppers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } from '../../store/form';
