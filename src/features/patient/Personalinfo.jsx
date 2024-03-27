@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
-import Steppers from './Steppers';
+import { useState,useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setPersonalInfo, setIsPersonalFormComplete, setIsPersonalFormClick } from '../../store/patient/form';
+import axios from 'axios';
 
 const Personalinfo = () => {
   const personalInfo = useSelector(state => state.form.personalInfo);
+  // console.log(personalInfo);
   const isPersonalFormClick = useSelector(state => state.form.isClick);
   const dispatch = useDispatch();
 
@@ -29,6 +30,17 @@ const Personalinfo = () => {
   <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
   </svg> ;
 
+  // useEffect(()=>{
+  //   const fetchUrl = async() => {
+  //     try {
+  //       const res = await axios.get('https://hospital-management-system-backend-7fee.vercel.app/api/v1/patients');
+  //       console.log(res)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   fetchUrl()
+  // },[])
 
   return (
     <>
@@ -40,15 +52,15 @@ const Personalinfo = () => {
                 <label className='text-base font-semibold text-black'>Full name</label>
                 <input 
                   type="text" 
-                  name="fullName" 
+                  name="name" 
                   id="fullName" 
-                  className={`w-[80%] bg-gray-50 outline ${isPersonalFormClick && !personalInfo.fullName ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
+                  className={`w-[80%] bg-gray-50 outline ${isPersonalFormClick && !personalInfo.name ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
                   text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
-                  value={personalInfo.fullName}
+                  value={personalInfo.name}
                   onChange={changeHandler}
                   placeholder='Enter full name'
                 />
-                {isPersonalFormClick && !personalInfo.fullName ? (
+                {isPersonalFormClick && !personalInfo.name ? (
                   <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please fill in a full name</span>
@@ -64,14 +76,14 @@ const Personalinfo = () => {
                 <label className='text-base font-semibold text-black'>Date of birth</label>
                 <input 
                   type="date" 
-                  name="dateOfBirth" 
+                  name="birthDate" 
                   id="dob" 
-                  className={`w-[80%] bg-gray-50 outline ${isPersonalFormClick && !personalInfo.fullName ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
+                  className={`w-[80%] bg-gray-50 outline ${isPersonalFormClick && !personalInfo.birthDate ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
                   text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
-                  value={personalInfo.dateOfBirth}
+                  value={personalInfo.birthDate}
                   onChange={changeHandler}
                 />
-                { isPersonalFormClick && !personalInfo.dateOfBirth ? <div className='w-full flex items-center mt-1 gap-1'> 
+                { isPersonalFormClick && !personalInfo.birthDate ? <div className='w-full flex items-center mt-1 gap-1'> 
                     <span className=''>{infoRedIcon}</span>
                     <span className='h-full text-xs text-red-500'>Please fill in a complete birthday</span>
                 </div>

@@ -26,6 +26,7 @@ const Pateint = () => {
   const [response, setResponse] = useState(false)
 
   const [combinedDatas,setCombinedDatas] = useState ({});
+  console.log(combinedDatas);
 
   const dispatch = useDispatch();
 
@@ -92,7 +93,6 @@ const Pateint = () => {
         </div>
         }
         <ToastContainer/>
-        {/* <SuccessFull/> */}
       </div>
     </form>
   )
