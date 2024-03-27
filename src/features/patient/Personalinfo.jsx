@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const Personalinfo = () => {
   const personalInfo = useSelector(state => state.form.personalInfo);
-  // console.log(personalInfo);
   const isPersonalFormClick = useSelector(state => state.form.isClick);
   const dispatch = useDispatch();
 
@@ -30,17 +29,17 @@ const Personalinfo = () => {
   <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
   </svg> ;
 
-  // useEffect(()=>{
-  //   const fetchUrl = async() => {
-  //     try {
-  //       const res = await axios.get('https://hospital-management-system-backend-7fee.vercel.app/api/v1/patients');
-  //       console.log(res)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   fetchUrl()
-  // },[])
+  useEffect(()=>{
+    const fetchUrl = async() => {
+      try {
+        const res = await axios.get('https://hospital-management-system-backend-7fee.vercel.app/api/v1/patients');
+        console.log(res)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchUrl()
+  },[])
 
   return (
     <>
@@ -101,8 +100,8 @@ const Personalinfo = () => {
                   name="gender" className={`bg-gray-50 outline  text-gray-900 
                 text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isPersonalFormClick && !personalInfo.gender ? 'outline-red-400' : 'outline-gray-300'} `}>
                     <option value="">Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                     <option value="other">Other</option>
                 </select>
                 { isPersonalFormClick && !personalInfo.gender ? <div className='w-full flex items-center mt-1 gap-1'> 

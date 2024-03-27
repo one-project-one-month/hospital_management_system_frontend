@@ -15,7 +15,6 @@ const formSlice = createSlice({
   initialState,
   reducers : {
     setPersonalInfo: (state, action) => {
-      console.log(action);
       state.personalInfo = { ...state.personalInfo, ...action.payload };
     },
     setIsPersonalFormComplete: (state, action) => {
