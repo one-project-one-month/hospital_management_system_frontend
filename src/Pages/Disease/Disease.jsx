@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
@@ -5,6 +6,7 @@ import "./style.module.css";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -23,6 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 
 const Disease = () => {
   return (

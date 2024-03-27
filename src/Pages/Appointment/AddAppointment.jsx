@@ -1,59 +1,163 @@
-import axios from "axios"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import PatientInput from "@/components/AppointmentHeader/PatientInput";
+import DoctorInput from "@/components/AppointmentHeader/DoctorInput";
+import RoomInput from "@/components/AppointmentHeader/RoomInput";
 
-const AddAppointment = () => {
-  const [addUser , setAddUser] = useState({
-    patientName:"",
-    doctorName:"",
-    date:"",
-    roomNo:""
-  })
-  const navigate = useNavigate()
-  const handleChange = (e) =>{
-    setAddUser({
-      ...addUser,[e.target.name]:e.target.value
-    })
-  }
-  const handelAdd = (e) =>{
+const Addappointment = () => {
+  const [isClose, setIsClose] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [patients, setPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  const [isroom, setIsRoom] = useState(false);
+  const [input, setInput] = useState("");
+  const [doctorInput, setDoctorInput] = useState("");
+  const [roomInput, setRoomInput] = useState("");
+  const [todate, setToDate] = useState("");
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    patientId: "",
+    doctorId: "",
+    roomId: "",
+    date: "",
+    status: "",
+  });
+
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+  const handleClick = () => {
+    setIsClose(!isClose);
+  };
+  const handleRoom = () => {
+    setIsRoom(!isroom);
+  };
+  useEffect(() => {
+    const getPatient = async () => {
+      const response = await fetch("http://localhost:3000/patient");
+      const result = await response.json();
+      setPatients(result);
+    };
+    getPatient();
+  });
+  useEffect(() => {
+    const getDoctor = async () => {
+      const response = await fetch("http://localhost:3000/Doctors");
+      const result = await response.json();
+      setDoctors(result);
+    };
+    getDoctor();
+  });
+  useEffect(() => {
+    const getRoom = async () => {
+      const response = await fetch("http://localhost:3000/Room");
+      const result = await response.json();
+      setRooms(result);
+    };
+    getRoom();
+  });
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    setIsOpen(false);
+    if (input === "") {
+      setIsOpen(true);
+    }
+  };
+  const handleDoctorChange = (e) => {
+    setDoctorInput(e.target.value);
+    setIsClose(false);
+    if (doctorInput === "") {
+      setIsClose(true);
+    }
+  };
+  const handleRoomSearch = (e) => {
+    setRoomInput(e.target.value);
+    setIsRoom(false);
+    if (roomInput === "") {
+      setIsRoom(true);
+    }
+  };
+  const handelOption = (name) => {
+    setInput(name);
+    setIsOpen(false);
+  };
+  const handelDoctorOption = (name) => {
+    setDoctorInput(name);
+    setIsClose(false);
+  };
+  const handleRoomInput = (No) => {
+    setRoomInput(No);
+    setIsRoom(false);
+  };
+  const handelClear = () => {
+    setInput("");
+    setIsOpen(false);
+  };
+  const handelDoctorClear = () => {
+    setDoctorInput("");
+    setIsClose(false);
+  };
+  const handleRoomClear = () => {
+    setRoomInput("");
+    setIsRoom(false)
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/users",addUser)
-    .then(res=>{
-      console.log(res.data)
-      navigate('/appointment')
-    })
-    .catch(err =>{
-      console.log(err.message)
-    })
-  }
+    axios
+      .post("http://localhost:3000/users", userData)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/appointment");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
-    <form className="mx-auto flex items-center justify-center flex-col mt-8" onSubmit={handelAdd}>
-      <div className="border  w-[300px]  shadow-md shadow-green-200 rounded-md">
-        <h2 className="text-blue-400 text-center p-4 text-2xl font-bold">Make A Appointment</h2>
-        <div className="px-4">
-          <label className="text-xl text-red-500 font-medium">Patient Name</label>
-          <input type="text" className="border rounded-sm w-[100%] mt-2 dark:text-black px-2 py-1" placeholder="Patient Name" name="patientName" value={addUser.patientName} onChange={handleChange}/>
+      <form
+        className="flex justify-center items-center mt-8"
+        onSubmit={handleSubmit}
+      >
+        <div className="border w-[90%] h-[100%] shadow-lg rounded-lg mb-4">
+          <h2 className="text-center pt-2 text-3xl font-bold text-blue-300 mt-4">
+            Made New Appointment
+          </h2>
+          <PatientInput patients={patients}  handelClear={handelClear} handelOption={handelOption} handleChange={handleChange} handleOpen={handleOpen} input={input} isOpen={isOpen}/>
+          <DoctorInput doctors={doctors} handelDoctorClear={handelDoctorClear} handelDoctorOption={handelDoctorOption} handleDoctorChange={handleDoctorChange} isClose={isClose} handleClick={handleClick} doctorInput={doctorInput}/>
+          <div className="w-[100%] h-[80px] px-4 mt-2 flex flex-col">
+            <label className="text-xl font-bold text-red-400">Date</label>
+            <input
+              type="datetime-local"
+              className="w-[100%] mt-2 border rounded-md h-[100%] px-4 text-black"
+              value={todate}
+              name="date"
+              onChange={(e) => setToDate(e.target.value)}
+            />
+          </div>
+          <RoomInput rooms={rooms} handleRoomClear={handleRoomClear} handleRoomInput={handleRoomInput} handleRoomSearch={handleRoomSearch} handleRoom={handleRoom} roomInput={roomInput}/>
+          <div className="flex items-center justify-center m-4">
+            <input
+              type="submit"
+              className="p-2 w-[30%] bg-[#1E88E5] text-white cursor-pointer text-xl font-semibold rounded-md"
+              onClick={() =>
+                setUserData({
+                  ...userData,
+                  patientId: input,
+                  doctorId: doctorInput,
+                  roomId: roomInput,
+                  date: todate,
+                })
+              }
+            />
+          </div>
         </div>
-        <div className="px-4 mt-2">
-          <label className="text-xl text-red-500 font-medium">Doctor Name</label>
-          <input type="text" className="border rounded-sm w-[100%] mt-2 dark:text-black px-2 py-1" placeholder="Doctor Name" name="doctorName" value={addUser.doctorName} onChange={handleChange}/>
-        </div>
-        <div className="px-4 mt-2">
-          <label className="text-xl text-red-500 font-medium">Date</label>
-          <input type="datetime-local" className="border rounded-sm w-[100%] mt-2 dark:text-black px-2 py-1" name="date" value={addUser.date} onChange={handleChange}/>
-        </div>
-        <div className="px-4 mt-2">
-          <label className="text-xl text-red-500 font-medium">Room Number</label>
-          <input type="text" className="border rounded-sm w-[100%] mt-2 dark:text-black px-2 py-1" placeholder="Room No" name="roomNo" value={addUser.roomNo} onChange={handleChange}/>
-        </div>
-        <div className="flex items-center mx-auto justify-center">
-          <input type="submit" value="Submit" className="px-2 py-1 bg-green-500 w-[70%] m-4 cursor-pointer rounded-md"/>
-        </div>
-      </div>
-    </form>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default AddAppointment
+export default Addappointment;

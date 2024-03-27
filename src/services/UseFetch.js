@@ -12,11 +12,11 @@ export const UserFetch = (url) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[url])
     const getData =()=>{
-        setLoading(true)
+        setLoading(false)
         axios.get(url)
         .then(res=>{
             setData(res.data)
-            setLoading(false)
+            setLoading(true)
         })
         .catch(err=>{
             setError(err.message)
@@ -27,7 +27,4 @@ export const UserFetch = (url) => {
         data,error,loading
     }
   )
-}
-export const postFunction = (url,data) =>{
-    return axios.post(url,data)
 }
