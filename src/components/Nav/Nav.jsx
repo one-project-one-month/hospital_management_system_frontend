@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Home, Stethoscope, Bed, ChevronsUpDown } from "lucide-react";
+import { Home, Stethoscope, Bed, ChevronsUpDown, BadgeCheck, FileText } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -27,7 +27,7 @@ const navLinks = [
   },
   {
     title: "Appointment",
-    icon: <Bed size={16} />,
+    icon: <BadgeCheck size={16} />,
     url: "/appointment",
     nested: [
       { title: "Appointment List", url: "/appointment" },
@@ -35,12 +35,12 @@ const navLinks = [
     ],
   },
   {
-    title: "Setup",
-    icon: <Bed size={16} />,
-    url: "/room",
+    title: "General",
+    icon: <FileText size={16} />,
+    url: "/general",
     nested: [
-      { title: "Room", url: "/room" },
-      { title: "Disease ", url: "/room/disease" },
+      { title: "Room", url: "/general"},
+      {title:"Disease ", url:"/general/disease"}
     ],
   },
 ];
@@ -79,12 +79,11 @@ function NavLinkButton({ title, url, icon, nested }) {
     <div
       className={cn(
         "max-h-8 overflow-hidden transition-all ease-out duration-150",
-        { "max-h-28": isOpen }
+        { "max-h-40": isOpen }
       )}
     >
       <NavLink
         onClick={dropDownToggle}
-        state={{ title }}
         to={url}
         className={({ isActive }) =>
           cn(
@@ -103,8 +102,7 @@ function NavLinkButton({ title, url, icon, nested }) {
           {nested.map(({ title, url }, id) => {
             return (
               <NavLink
-                state={{ title }}
-                key={id}
+              key={id}
                 className={({ isActive }) =>
                   cn(linkStyle, {
                     "before:block before:absolute before:-left-1 before:top-1.5 before:w-0.5 before:h-5 before:rounded-full before:bg-blue-500 text-black dark:text-white":

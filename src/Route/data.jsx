@@ -13,6 +13,7 @@ export const routes = [
   {
     path: "/",
     Component: Main,
+    handle: { title: "Home" },
     errorElement: <NotFound />,
     children: [
       {
@@ -21,6 +22,7 @@ export const routes = [
       },
       {
         path: "doctor",
+        handle: { title: "Doctor" },
         children: [
           {
             index: true,
@@ -28,12 +30,14 @@ export const routes = [
           },
           {
             path: "doctorSpecialist",
+            handle: { title: "Doctor Specialist" },
             Component: DoctorSpecialist,
           },
         ],
       },
       {
         path: "patient",
+        handle: { title: "Patient" },
         children: [
           {
             index: true,
@@ -41,12 +45,14 @@ export const routes = [
           },
           {
             path: "medicalRecords",
+            handle: { title: "Medical Records" },
             element: <h1>Medical Records</h1>,
           },
         ],
       },
       {
         path: "appointment",
+        handle: { title: "Appointment List"},
         children: [
           {
             index: true,
@@ -54,21 +60,24 @@ export const routes = [
           },
           {
             path: "/appointment/add",
+            handle: { title: "New Appointment"},
             Component: AddAppointment,
           },
         ],
       },
       {
-        path:"room",
-        children:[
+        path: "general",
+        handle: { title: "Room"},
+        children: [
           {
-            index:true,
-            Component:Room
+            index: true,
+            Component: Room,
           },
           {
-            path:'disease',
-            Component:Disease
-          }
+            path: "/general/disease",
+            handle: { title: "Disease" },
+            Component: Disease,
+          },
         ]
       }
     ],

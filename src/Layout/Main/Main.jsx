@@ -4,9 +4,9 @@ import Header from "@/components/Header/Header";
 
 function Main() {
   return (
-    <div className=" font-primary flex h-svh w-svw dark:bg-neutral-950">
+    <div className=" font-primary flex h-svh w-svw dark:bg-neutral-950 overflow-hidden">
       <SideBar />
-      <div className="grow">
+      <div className="grow overflow-y-scroll">
         <Header/>
         <Outlet/>
       </div>  
