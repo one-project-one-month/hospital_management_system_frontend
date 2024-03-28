@@ -1,14 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-import { UserFetch } from '@/services/UseFetch';
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
-const Paginate = ({setCurrentPage,itemPerPage,currentPage,currentIndex}) => {
-    const url = 'http://localhost:3000/users'
-    const {data}  = UserFetch(url)
-  
+const Paginate = ({setCurrentPage,itemPerPage,currentPage,currentIndex,data}) => {
    
 
     const [pageNumberLimit] = useState(5);
@@ -17,6 +13,7 @@ const Paginate = ({setCurrentPage,itemPerPage,currentPage,currentIndex}) => {
     const pages = [];
 
       
+    // eslint-disable-next-line react/prop-types
     for (let i = 1; i <= Math.ceil(data.length / itemPerPage); i++) {
         pages.push(i);
       }
