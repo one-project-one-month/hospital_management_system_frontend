@@ -6,31 +6,30 @@ import { MdDelete } from "react-icons/md";
 
 const Table = ({filterData}) => {
 
-  const url = "http://localhost:3000/users";
+  const url = "https://hospital-management-system-backend.vercel.app/api/v1/appointments";
 
-  const handleCancel = (el) => {
-    axios.put(`${url}/${el}`, {
-      ...el,
-      status: "Cancelled",
+  const handleCancel = (Id) => {
+  
+    axios.put(`${url}/${Id}`, {
+      ...Id, Status: "Cancelled" , IsCancel : true
     })
-    window.location.reload()
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(error => {
+      console.error("Error updating appointment status:", error);
+    });
   };
-
-  const handleDelete = (el) => {
-    const confirm = window.confirm("Are you want to delete?");
-    if (confirm) {
-      axios
-        .delete(url + "/" + el)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+  
+  const handelDelete = (Id) =>{
+      axios.delete(`${url}/${Id}`)
+      .then(res=>{
+        console.log(res.data)
+      })
+      .catch(err =>{
+        console.log(err.message)
+      })
     }
-    window.location.reload()
-  };
-
   return (
     <>
       <table className="table border-collapse w-[90%] mx-[auto] shadow-green-200 shadow-md ">
@@ -52,26 +51,27 @@ const Table = ({filterData}) => {
                 return (
                   <tr
                     className="border hover:bg-[#649CF7] text-center font-medium text-sm hover:text-white"
-                    key={d.id}
+                    key={d.Id}
                   >
-                    <td className="px-6 py-2">{d.patientName}</td>
+                    <td className="px-6 py-2">{d.Patient.Name}</td>
                     <td className="px-6 py-2">
                       {moment(d.date).format("LLL")}
                     </td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">{d.doctorName}</td>
-                    <td className="px-6 py-2">{d.roomNo}</td>
-                    <td className="text-red-600 px-6 py-2">{d.status}</td>
+                    <td className="px-6 py-2">{d.TokenId}</td>
+                    <td className="px-6 py-2">{d.Doctor.DoctorName}</td>
+                    <td className="px-6 py-2">{d.Room.Name}</td>
+                    <td className={`${d.IsCancel ? 'text-red-600 px-6 py-2' : 'text-green-600 px-6 py-2'}`}>{d.Status}</td>
                     <td className="px-6 py-2 flex items-center justify-center">
                       <input
                         type="checkbox"
                         className="cursor-pointer"
-                        onClick={() => handleCancel(d.id)}
+                        checked={d.IsCancel}
+                        onChange={() => handleCancel(d.Id)}
                       />
                       <MdDelete
-                        className="text-red-400 mx-2"
+                        className="text-red-400 mx-2 cursor-pointer"
                         size={20}
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handelDelete(d.Id)}
                       />
                     </td>
                   </tr>
