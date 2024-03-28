@@ -1,9 +1,27 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { HiOutlineXMark } from "react-icons/hi2";
+import React, { useState } from 'react'
 // eslint-disable-next-line react/prop-types
-const DoctorInput = ({doctorInput,handleDoctorChange,handelDoctorClear,handleClick,isClose,doctors,handelDoctorOption}) => {
+const DoctorInput = ({userData,setUserData,doctors}) => {
+  
+  const [selectedDoctorId, setSelectedDoctorId] = useState(null);
+
+  const handelDoctor = (e) =>{
+    const doctor = e.target.value;
+    // eslint-disable-next-line react/prop-types
+    const selectDoctor = doctors.find((d) =>{
+     return d.DoctorName = doctor;
+    })
+   if(selectDoctor){
+    setSelectedDoctorId(selectDoctor.Id)
+    setUserData({
+      ...userData,DoctorId : selectedDoctorId
+    })
+   }
+   else{
+    setSelectedDoctorId(null)
+   }
+  }
+
   return (
     <div>
             <div className=" relative w-[100%] h-[80px] px-4 mt-2">
@@ -14,47 +32,10 @@ const DoctorInput = ({doctorInput,handleDoctorChange,handelDoctorClear,handleCli
               <input
                 type="text"
                 className="border w-[100%] h-[100%] p-2 rounded-md text-black"
-                name="doctorID"
-                value={doctorInput}
-                onChange={handleDoctorChange}
+                name="doctorName"
+                onChange= {handelDoctor}
                 placeholder="Doctor Name"
-              />
-              <div className="absolute top-2 right-2 cursor-pointer flex items-center justify-center">
-                <HiOutlineXMark
-                  size={25}
-                  onClick={handelDoctorClear}
-                  className={`${doctorInput === "" ? "hidden" : "block"}`}
                 />
-                <MdKeyboardArrowDown size={30} onClick={handleClick} />
-              </div>
-            </div>
-            <div
-              className={`${
-                isClose
-                  ? "block border absolute w-[90%] h-[100px] overflow-y-scroll text-center bg-black z-10"
-                  : "hidden"
-              }`}
-            >
-              {doctors
-                // eslint-disable-next-line react/prop-types
-                .filter((item) => {
-                  // eslint-disable-next-line react/prop-types
-                  return doctorInput.toLowerCase() === ""
-                    ? item
-                    : item.name.toLowerCase().includes(doctorInput);
-                })
-                .map((doctor) => {
-                  return (
-                    <option
-                      value={doctor.name}
-                      key={doctor.id}
-                      className="border cursor-pointer text-xl font-semibold text-white hover:bg-gray-500"
-                      onClick={() => handelDoctorOption(doctor.name)}
-                    >
-                      {doctor.name}
-                    </option>
-                  );
-                })}
             </div>
           </div>
     </div>

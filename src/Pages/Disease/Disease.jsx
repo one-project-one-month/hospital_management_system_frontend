@@ -1,4 +1,5 @@
 
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
@@ -33,8 +34,9 @@ const Disease = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            {" "}
-            <h1>Disease Setup</h1>
+            <div>
+              <h1>Disease Setup</h1>
+            </div>
           </CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>

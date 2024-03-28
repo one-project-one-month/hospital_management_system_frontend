@@ -1,10 +1,25 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { HiOutlineXMark } from "react-icons/hi2";
+import React, { useState } from 'react'
+
 
 // eslint-disable-next-line react/prop-types
-const PatientInput = ({patients,handleChange,handelClear,handleOpen ,input,handelOption,isOpen}) => {
+const PatientInput = ({userData,setUserData,patients}) => {
+
+
+  const [selectedPatient , setSelectedPatient] = useState(null)
+
+  const handelPatients = (e) =>{
+    const patient = e.target.value;
+    // eslint-disable-next-line react/prop-types
+    const selectPatient = patients.find((p)=> {
+      return p.Name === patient })
+      if(selectPatient){
+        setSelectedPatient(selectPatient.Id)
+        setUserData({
+          ...userData,PatientId : selectedPatient
+        })
+      }
+  }
   return (
     <div>
         <div className="relative w-[100%] h-[80px] px-4 mt-2">
@@ -15,50 +30,10 @@ const PatientInput = ({patients,handleChange,handelClear,handleOpen ,input,hande
               <input
                 type="text"
                 className="border w-[100%] h-[100%] p-2 rounded-md text-black"
-                name="patientID"
-                value={input}
-                onChange={handleChange}
-                placeholder="Patient Name"
-              />
-              <div className="absolute top-2 right-2 cursor-pointer flex items-center justify-center">
-                <HiOutlineXMark
-                  size={25}
-                  onClick={handelClear}
-                  className={`${input === "" ? "hidden" : "block"}`}
-                />
-                <MdKeyboardArrowDown size={30} onClick={handleOpen} />
-              </div>
-            </div>
-            <div
-              className={`${
-                // eslint-disable-next-line no-undef
-                isOpen
-                  ? "block border absolute w-[90%] h-[100px] overflow-y-scroll text-center z-10 bg-black"
-                  : "hidden"
-              }`}
-            >
-              {patients
-                // eslint-disable-next-line react/prop-types
-                .filter((item) => {
-                  // eslint-disable-next-line react/prop-types
-                  return input.toLowerCase() === ""
-                    ? item
-                    : item.name.toLowerCase().includes(input);
-                })
-                .map((patient) => {
-                  return (
-                    <option
-                      value={patient.name}
-                      key={patient.id}
-                      className="border cursor-pointer text-xl font-semibold text-white hover:bg-gray-500 text-center"
-                      // eslint-disable-next-line no-undef
-                      onClick={() => handelOption(patient.name)}
-                    >
-                      {patient.name}
-                    </option>
-                  );
-                })}
-            </div>
+                name="patientName"
+                onChange= {handelPatients}
+                placeholder="Patient Name"/>
+          </div>
           </div>
     </div>
   )

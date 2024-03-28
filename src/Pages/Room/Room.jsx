@@ -1,4 +1,5 @@
 
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import "./style.module.css";
 import { Label } from "@/components/ui/label";
@@ -31,8 +32,9 @@ const Room = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            {" "}
-            <h1>Room Setup</h1>
+            <div>
+              <h1>Room Setup</h1>
+            </div>
           </CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
