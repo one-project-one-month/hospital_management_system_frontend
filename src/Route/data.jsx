@@ -44,6 +44,7 @@ export const routes = [
           },
           {
             path: "medicalRecords",
+            handle: { title: "Medical Records" },
             element: <h1>Medical Records</h1>,
           },
         ],
