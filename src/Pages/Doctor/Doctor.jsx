@@ -89,7 +89,7 @@ const DcotorsContainer = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://hospital-management-system-backend.vercel.app/api/v1/doctor"
+          "https://hospital-management-system-backend.vercel.app/api/v1/doctors"
         );
         if (response.status === 200) {
           const data = await response.data.data;

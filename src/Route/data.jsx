@@ -4,7 +4,6 @@ import Main from "../Layout/Main/Main.jsx";
 import { Home } from "../Pages/Home/Home.jsx";
 import Appointment from "@/Pages/Appointment/Appointment.jsx";
 import AddAppointment from "@/Pages/Appointment/AddAppointment.jsx";
-
 import Room from "@/Pages/Room/Room.jsx";
 import Disease from "@/Pages/Disease/Disease.jsx";
 import DoctorContainer from "@/Pages/Doctor/Doctor.jsx";
