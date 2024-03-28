@@ -12,8 +12,8 @@ const navLinks = [
     icon: <Stethoscope size={16} />,
     url: "/doctor",
     nested: [
-      { title: "Doctor List", url: "/doctor"},
-      { title: "Doctor Specialist", url: "/doctor/doctorSpecialist" },
+      { title: "Doctor List", url: "/doctor" },
+      { title: "Manage", url: "/doctor/doctorSpecialist" },
     ],
   },
   {
@@ -21,7 +21,7 @@ const navLinks = [
     icon: <Bed size={16} />,
     url: "/patient",
     nested: [
-      { title: "Patient List", url: "/patient"},
+      { title: "Patient List", url: "/patient" },
       { title: "Medical Records", url: "/patient/medicalRecords" },
     ],
   },
@@ -30,8 +30,8 @@ const navLinks = [
     icon: <BadgeCheck size={16} />,
     url: "/appointment",
     nested: [
-      { title: "Appointment List", url: "/appointment"},
-      {title:"New Appointment ", url:"/appointment/add"}
+      { title: "Appointment List", url: "/appointment" },
+      { title: "New Appointment ", url: "/appointment/add" },
     ],
   },
   {
@@ -99,7 +99,7 @@ function NavLinkButton({ title, url, icon, nested }) {
       </NavLink>
       {nested && (
         <div className="relative before:block before:absolute before:left-5 before:inset-y-2.5 before:w-0.5 before:bg-neutral-200 dark:before:bg-neutral-500 pl-6 py-1 flex flex-col gap-y-1">
-          {nested.map(({title, url}, id) => {
+          {nested.map(({ title, url }, id) => {
             return (
               <NavLink
               key={id}

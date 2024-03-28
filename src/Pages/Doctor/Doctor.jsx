@@ -1,4 +1,3 @@
-
 /* eslint-disable react/prop-types */
 import {
   Card,
@@ -89,7 +88,7 @@ const DcotorsContainer = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://hospital-management-system-backend.vercel.app/api/v1/doctor"
+          "https://hospital-management-system-backend.vercel.app/api/v1/doctors"
         );
         if (response.status === 200) {
           const data = await response.data.data;
@@ -106,7 +105,6 @@ const DcotorsContainer = () => {
     fetchData().then((data) => {
       setDoctors(data);
     });
-    // setDoctors(sampleDoctorData);
   }, []);
 
   return (
@@ -116,7 +114,7 @@ const DcotorsContainer = () => {
           No doctors found.
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {doctors.map((doctor) => (
             <DoctorCard key={doctor.Id} props={doctor} />
           ))}

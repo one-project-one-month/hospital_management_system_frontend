@@ -1,0 +1,47 @@
+{
+    "patients":[
+        {
+            "id":1,
+            "name":"Daw Mya Mya"
+        },
+        {
+            "id":2,
+            "name":"Daw Hla Mya"
+        },
+        {
+            "id":3,
+            "name":"Daw Mya Hla"
+        }
+    ],
+    "doctors":[
+        {
+            "id":1,
+            "name":"Aung Aung"
+        },
+        {
+            "id":2,
+            "name":"Mg Aung"
+        },
+        {
+            "id":3,
+            "name":"Aung Maung"
+        }
+    ],
+    "rooms":[
+        {
+            "id":1,
+            "name":1934
+        },
+        {
+            "id":2,
+            "name":1834
+        },
+        {
+            "id":3,
+            "name":1434
+        }
+    ],
+    "appointment":[
+        {}
+    ]
+}
