@@ -1,10 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { buttonVariants } from "@/components/ui/button"
-import './style.module.css'
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+// eslint-disable-next-line no-unused-vars
+import React from "react";
+import "./style.module.css";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,7 +13,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
 import {
   Table,
@@ -306,17 +307,10 @@ const handelAdd =  async(e) =>{
   
   </CardFooter>
 </Card>
-      
-   
-
     </>
-  
-   
-  
+  );
+};
+
+export default Room;
 
 
-
-  )
-}
-
-export default Room

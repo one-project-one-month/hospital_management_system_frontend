@@ -6,45 +6,42 @@ import { MdDelete } from "react-icons/md";
 
 const Table = ({filterData}) => {
 
-  const url = "http://localhost:3000/users";
+  const url = "https://hospital-management-system-backend.vercel.app/api/v1/appointments";
 
-  const handleCancel = (el) => {
-    axios.put(`${url}/${el}`, {
-      ...el,
-      status: "Cancelled",
+  const handleCancel = (Id) => {
+  
+    axios.put(`${url}/${Id}`, {
+      ...Id, Status: "Cancelled" , IsCancel : true
     })
-    window.location.reload()
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(error => {
+      console.error("Error updating appointment status:", error);
+    });
   };
-
-  const handleDelete = (el) => {
-    const confirm = window.confirm("Are you want to delete?");
-    if (confirm) {
-      axios
-        .delete(url + "/" + el)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+  
+  const handelDelete = (Id) =>{
+      axios.delete(`${url}/${Id}`)
+      .then(res=>{
+        console.log(res.data)
+      })
+      .catch(err =>{
+        console.log(err.message)
+      })
     }
-    window.location.reload()
-  };
-
   return (
     <>
       <table className="table border-collapse w-[90%] mx-[auto] shadow-green-200 shadow-md ">
-        <thead className="border text-center font-bold">
+        <thead className="border text-center font-bold bg-[#3b82f6] text-white">
           <tr>
-            <th className="px-6 py-3">
-              <input type="checkbox" className="cursor-pointer" />
-            </th>
             <th className="px-6 py-3">Patient Name</th>
             <th className="px-6 py-3">Appointment Date</th>
             <th className="px-6 py-3">Token No</th>
             <th className="px-6 py-3">Doctor Name</th>
             <th className="px-6 py-3">Room No</th>
             <th className="px-6 py-3">Status</th>
+            <th>Is Cancel</th>
           </tr>
         </thead>
         <tbody>
@@ -53,29 +50,30 @@ const Table = ({filterData}) => {
               .map((d) => {
                 return (
                   <tr
-                    className="border hover:bg-gray-400 text-center font-medium text-sm"
-                    key={d.id}
+                    className="border hover:bg-[#649CF7] text-center font-medium text-sm hover:text-white"
+                    key={d.Id}
                   >
+                    <td className="px-6 py-2">{d.Patient.Name}</td>
+                    <td className="px-6 py-2">
+                      {moment(d.date).format("LLL")}
+                    </td>
+                    <td className="px-6 py-2">{d.TokenId}</td>
+                    <td className="px-6 py-2">{d.Doctor.DoctorName}</td>
+                    <td className="px-6 py-2">{d.Room.Name}</td>
+                    <td className={`${d.IsCancel ? 'text-red-600 px-6 py-2' : 'text-green-600 px-6 py-2'}`}>{d.Status}</td>
                     <td className="px-6 py-2 flex items-center justify-center">
                       <input
                         type="checkbox"
                         className="cursor-pointer"
-                        onClick={() => handleCancel(d.id)}
+                        checked={d.IsCancel}
+                        onChange={() => handleCancel(d.Id)}
                       />
                       <MdDelete
-                        className="text-red-400 mx-2"
+                        className="text-red-400 mx-2 cursor-pointer"
                         size={20}
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handelDelete(d.Id)}
                       />
                     </td>
-                    <td className="px-6 py-2">{d.patientName}</td>
-                    <td className="px-6 py-2">
-                      {moment(d.date).format("LLL")}
-                    </td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">{d.doctorName}</td>
-                    <td className="px-6 py-2">{d.roomNo}</td>
-                    <td className="text-red-600 px-6 py-2">{d.status}</td>
                   </tr>
                 );
               })}

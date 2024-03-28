@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Home, Stethoscope, Bed, ChevronsUpDown } from "lucide-react";
+import { Home, Stethoscope, Bed, ChevronsUpDown, BadgeCheck, FileText } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -12,8 +12,8 @@ const navLinks = [
     icon: <Stethoscope size={16} />,
     url: "/doctor",
     nested: [
-      { title: "Doctor List", url: "/doctor"},
-      { title: "Doctor Specialist", url: "/doctor/doctorSpecialist" },
+      { title: "Doctor List", url: "/doctor" },
+      { title: "Manage", url: "/doctor/doctorSpecialist" },
     ],
   },
   {
@@ -21,17 +21,26 @@ const navLinks = [
     icon: <Bed size={16} />,
     url: "/patient",
     nested: [
-      { title: "Patient List", url: "/patient"},
+      { title: "Patient List", url: "/patient" },
       { title: "Medical Records", url: "/patient/medicalRecords" },
     ],
   },
   {
     title: "Appointment",
-    icon: <Bed size={16} />,
+    icon: <BadgeCheck size={16} />,
     url: "/appointment",
     nested: [
-      { title: "Appointment", url: "/appointment"},
-      {title:"AddAppointment ", url:"/appointment/add"}
+      { title: "Appointment List", url: "/appointment" },
+      { title: "New Appointment ", url: "/appointment/add" },
+    ],
+  },
+  {
+    title: "General",
+    icon: <FileText size={16} />,
+    url: "/general",
+    nested: [
+      { title: "Room", url: "/general"},
+      {title:"Disease ", url:"/general/disease"}
     ],
   },
 ];
@@ -70,12 +79,11 @@ function NavLinkButton({ title, url, icon, nested }) {
     <div
       className={cn(
         "max-h-8 overflow-hidden transition-all ease-out duration-150",
-        { "max-h-28": isOpen }
+        { "max-h-40": isOpen }
       )}
     >
       <NavLink
         onClick={dropDownToggle}
-        state={{title}}
         to={url}
         className={({ isActive }) =>
           cn(
@@ -91,10 +99,9 @@ function NavLinkButton({ title, url, icon, nested }) {
       </NavLink>
       {nested && (
         <div className="relative before:block before:absolute before:left-5 before:inset-y-2.5 before:w-0.5 before:bg-neutral-200 dark:before:bg-neutral-500 pl-6 py-1 flex flex-col gap-y-1">
-          {nested.map(({title, url}, id) => {
+          {nested.map(({ title, url }, id) => {
             return (
               <NavLink
-              state={{title}}
               key={id}
                 className={({ isActive }) =>
                   cn(linkStyle, {

@@ -1,10 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { buttonVariants } from "@/components/ui/button"
-import './style.module.css'
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+
+// eslint-disable-next-line no-unused-vars
+import React from "react";
+import { Link } from "react-router-dom";
+import { buttonVariants } from "@/components/ui/button";
+import "./style.module.css";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -12,7 +15,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
 import {
   Table,
@@ -30,6 +33,7 @@ import { MdEdit } from "react-icons/md";
 import axios from "axios"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+
 
  const Disease = () => {
 
@@ -190,8 +194,7 @@ const handelAdd =  async(e) =>{
   }
   
  
-};
-
+};  
   return (
     <>
     <Card>
@@ -328,14 +331,10 @@ const handelAdd =  async(e) =>{
       
    
 
+
     </>
-  
-   
-  
-
-
-
-  )
-}
+  );
+};
 
 export default Disease
+
