@@ -9,7 +9,7 @@ export default function Header() {
   const title = matches.filter(match => match.pathname === location.pathname).map(match => match.handle && match.handle.title)
 
   return (
-    <header className=" py-3 px-4 border-b border-b-neutral-200 flex items-center justify-between divide-x divide-neutral-100 dark:divide-neutral-700 dark:border-b-neutral-700">
+    <header className="sticky top-0 bg-white py-3 px-4 border-b border-b-neutral-200 flex items-center justify-between divide-x divide-neutral-100 dark:divide-neutral-700 dark:border-b-neutral-700">
       <h1 className=" font-bold text-lg">{title}</h1>
       <div className="flex">
         <div className="px-2 flex gap-x-2 items-center cursor-pointer group">

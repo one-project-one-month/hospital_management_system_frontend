@@ -32,11 +32,6 @@ export const routes = [
             handle: { title: "Doctor Specialist" },
             element: <h1>Doctor Specialist</h1>,
           },
-          {
-            path: "/doctor/Disease",
-            handle: { title: "Disease" },
-            element: <Disease />,
-          },
         ],
       },
       {
@@ -50,10 +45,6 @@ export const routes = [
           {
             path: "medicalRecords",
             element: <h1>Medical Records</h1>,
-          },
-          {
-            path: "/patient/Room",
-            element: <Room />,
           },
         ],
       },
@@ -72,6 +63,21 @@ export const routes = [
           },
         ],
       },
+      {
+        path: "general",
+        handle: { title: "Room"},
+        children: [
+          {
+            index: true,
+            Component: Room,
+          },
+          {
+            path: "/general/disease",
+            handle: { title: "Disease" },
+            Component: Disease,
+          },
+        ]
+      }
     ],
   },
 ];

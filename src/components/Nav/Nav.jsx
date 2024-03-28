@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Home, Stethoscope, Bed, ChevronsUpDown, BadgeCheck } from "lucide-react";
+import { Home, Stethoscope, Bed, ChevronsUpDown, BadgeCheck, FileText } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -14,7 +14,6 @@ const navLinks = [
     nested: [
       { title: "Doctor List", url: "/doctor"},
       { title: "Doctor Specialist", url: "/doctor/doctorSpecialist" },
-      { title: "Disease", url: "/doctor/disease"}
     ],
   },
   {
@@ -36,12 +35,12 @@ const navLinks = [
     ],
   },
   {
-    title: "Setup",
-    icon: <Bed size={16} />,
-    url: "/room",
+    title: "General",
+    icon: <FileText size={16} />,
+    url: "/general",
     nested: [
-      { title: "Room", url: "/room"},
-      {title:"Disease ", url:"/room/disease"}
+      { title: "Room", url: "/general"},
+      {title:"Disease ", url:"/general/disease"}
     ],
   },
 ];
