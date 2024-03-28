@@ -28,26 +28,44 @@ import { useState } from "react"
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import axios from "axios"
-
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 
  const Disease = () => {
 
 
   const [search , setSearch] = useState('');
 
-  const [addDisease , setAddDiseae] = useState({
-    id:"0",
-    name:""   
-  })
+  const [addDisease , setAddDiseae] = useState([]);
+  const [addDiseaseData , setAddDiseaeData] = useState({
+    "Id": 0,
+    "Name": ""
+   
+  });
 
-  // const myForm = useRef(null)
+ 
 
- const url = "http://localhost:3000/diseases";
- //const url="https://hospital-management-system-backend.vercel.app/api/v1/diseases";
+ //const url = "http://localhost:3000/diseases";
+ //const url="https://hospital-management-system-backend.vercel.app/api/v1/appointments";
+ const url="https://hospital-management-system-backend.vercel.app/api/v1/diseases";
+ 
 
  // eslint-disable-next-line no-unused-vars
- const {data , error , loading} = UserFetch(url);
+ //const {data , error , loading} = UserFetch(url);
  
+ const fetchData = async() =>{
+  await axios.get(url)
+  .then(res =>{
+    setAddDiseae(res.data.data)
+  })
+}
+useEffect(()=>{
+  fetchData()
+},[])
+
+
+
+
  const [currentPage, setCurrentPage] = useState(1);
  const [itemPerPage] = useState(5);
 
@@ -56,14 +74,20 @@ import axios from "axios"
  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
  const pages = [];
 
- 
+ const navigate = useNavigate();
 
- for (let i = 1; i <= Math.ceil(data.length / itemPerPage); i++) {
+ for (let i = 1; i <= Math.ceil(addDisease.length / itemPerPage); i++) {
    pages.push(i);
  }
  const lastIndex = currentPage * itemPerPage;
  const firstIndex = lastIndex - itemPerPage;
- const currentIndex =  data.slice(firstIndex, lastIndex);
+
+
+  const currentIndex=addDisease.slice(firstIndex, lastIndex);
+ 
+
+
+ 
 
  const pageClick = (e) => {
    setCurrentPage(Number(e.target.id));
@@ -86,31 +110,27 @@ import axios from "axios"
 
  const filterData = currentIndex
  .filter((u)=>{
-   return search.toLowerCase() === '' ? u : u.name.toLowerCase().includes(search)
+   return search.toLowerCase() === '' ? u : u.Name.toLowerCase().includes(search)
  })
 
 
- const handleEdit = (el) => {
+ const handleEdit = async(el)  => {
 
 //  alert(`${url}/${el}`);
 
-  axios.get(`${url}/${el}`).then((res)=>
+ await axios.get(`${url}/${el}`).then((res)=>
    // myForm.current.reset()
-    setAddDiseae(res.data)
- 
-  
-  // setAddDiseae({
-  //   addDisease,name:res.data.name
-  // })
+   setAddDiseaeData(res.data.data)
+   
   )
  // window.location.reload()
 };
 
-const handleDelete = (el) => {
+const handleDelete = async (el) => {
   const confirm = window.confirm("Are you want to delete?");
   if (confirm) {
    // alert(el);
-    axios
+   await axios
       .delete(url + "/" + el)
       .then((res) => {
         console.log(res.data);
@@ -119,23 +139,37 @@ const handleDelete = (el) => {
         console.log(err.message);
       });
   }
-  window.location.reload()
+ window.location.reload()
+ //navigate('/Disease')
 };
 
 
 const handleChange = (e) =>{
-  setAddDiseae({
-    ...addDisease,[e.target.name]:e.target.value
+  setAddDiseaeData({
+    ...addDiseaseData,[e.target.name]:e.target.value
   })
 }
-const handelAdd = (e) =>{
+
+
+const handelAdd =  async(e) =>{
   e.preventDefault();
-  if(addDisease.id!=0)
+
+  let data = JSON.stringify({
+    id: addDiseaseData.Id,
+    name: addDiseaseData.Name//,
+   // description: addDiseaseData.Description
+  });
+
+  if(addDiseaseData.Id!=0)
   {
-    axios.put(url+"/"+addDisease.id,addDisease).then(res=>{
-      console.log(res.data)
-      window.location.reload()
-     // navigate('/appointment')
+    console.log("1");
+    
+
+
+  await  axios.put(url+"/"+addDiseaseData.Id,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+    
+     window.location.reload()
+     // navigate('/Disease')
     })
     .catch(err =>{
       console.log(err.message)
@@ -143,10 +177,12 @@ const handelAdd = (e) =>{
   }
   else
   {
-    axios.post(url,addDisease).then(res=>{
-      console.log(res.data)
-      window.location.reload()
-     // navigate('/appointment')
+    console.log("2");
+   
+  
+  await axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+       window.location.reload()
+    //  navigate('/Disease')
     })
     .catch(err =>{
       console.log(err.message)
@@ -168,17 +204,18 @@ const handelAdd = (e) =>{
   <form   className="mx-auto flex items-center justify-center flex-col mt-8" onSubmit={handelAdd}> 
   <div>       
   <Label htmlFor="diseaseid">Disease ID</Label>
-      <Input disabled="true" name="id" value={addDisease.id} onChange={handleChange}></Input>
+      <Input disabled="true" name="Id" value={addDiseaseData.Id} onChange={handleChange}></Input>
+    
       <Label htmlFor="diseaseName">Disease Name</Label>
-      <Input  placeholder="Disease Name" name="name" value={addDisease.name} onChange={handleChange} ></Input><br/>
+      <Input  placeholder="Disease Name" name="Name" value={addDiseaseData.Name} onChange={handleChange} ></Input><br/>
       
       <input type="submit" value="Submit" className="px-2 py-1 bg-blue-400 w-[100%] m-4 cursor-pointer rounded-md"/>
     </div> 
     </form> 
-    {loading && <h1>Loading...</h1>}
-    {error && <h1>Something went wrong</h1>}
+   {/*  {loading && <h1>Loading...</h1>}
+    {error && <h1>Something went wrong</h1>} */}
     <div className="flex px-4 items-center m-4">
-          <h2 className="font-semibold">Showing <span className="font-bold text-xl text-blue-500">{currentIndex.length}</span> Rooms</h2>
+          <h2 className="font-semibold">Showing <span className="font-bold text-xl text-blue-500">{currentIndex.length}</span> Diseases</h2>
           <input type="text" placeholder="Search..." className="border ml-4 w-[300px] px-2 py-1 rounded-md dark:text-black" onChange={(e)=> setSearch(e.target.value)}/>
         </div>
         <Table >
@@ -197,20 +234,20 @@ const handelAdd = (e) =>{
                 return (
                   <TableRow
                     className="border hover:bg-gray-100 text-center font-medium text-sm"
-                    key={d.id}
+                    key={d.Id}
                   >
-                      <TableCell className="px-6 py-2">{d.id}</TableCell>
-                    <TableCell className="px-6 py-2">{d.name}</TableCell>
+                      <TableCell className="px-6 py-2">{d.Id}</TableCell>
+                    <TableCell className="px-6 py-2">{d.Name}</TableCell>
                     <TableCell className="px-6 py-2 flex items-center justify-center">                     
                     <MdEdit
                         className="text-blue-400 mx-2"
                         size={20}
-                        onClick={() => handleEdit(d.id)}
+                        onClick={() => handleEdit(d.Id)}
                       />
                       <MdDelete
                         className="text-blue-400 mx-2"
                         size={20}
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handleDelete(d.Id)}
                       />
                     </TableCell>
                     {/* <TableCell className="text-right"> <Button>Edit</Button> <Button>Delete</Button></TableCell> */}

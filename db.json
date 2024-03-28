@@ -55,27 +55,6 @@
       "id": "9",
       "name": "fdfdf"
     }
-  ],
-  "rooms": [
-    {
-      "id": "3",
-      "name": "Room 33333"
-    },
-    {
-      "id": "4",
-      "name": "Room 4"
-    },
-    {
-      "id": "5",
-      "name": "Room 5"
-    },
-    {
-      "id": "6",
-      "name": "Room 6"
-    },
-    {
-      "id": "7",
-      "name": "Room 7"
-    }
   ]
+  
 }

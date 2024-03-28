@@ -1,10 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { buttonVariants } from "@/components/ui/button"
 import './style.module.css'
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Link } from 'react-router-dom'
-import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -28,24 +28,44 @@ import { useState } from "react"
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import axios from "axios"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 
-const Room = () => {
+ const Room = () => {
+
 
   const [search , setSearch] = useState('');
 
-  const [addRoom , setAddRoom] = useState({
-    id:"0",
-    name:""   
-  })
+  const [addRoom , setAddRoom] = useState([]);
+  const [addRoomData , setAddRoomData] = useState({
+    "Id": 0,
+    "Name": ""
+   
+  });
 
-  // const myForm = useRef(null)
+ 
 
- const url = "http://localhost:3000/rooms";
- //const url="https://hospital-management-system-backend.vercel.app/api/v1/rooms"
+ //const url = "http://localhost:3000/diseases";
+ //const url="https://hospital-management-system-backend.vercel.app/api/v1/appointments";
+ const url="https://hospital-management-system-backend.vercel.app/api/v1/rooms";
+ 
 
  // eslint-disable-next-line no-unused-vars
- const {data , error , loading} = UserFetch(url);
+ //const {data , error , loading} = UserFetch(url);
  
+ const fetchData = async() =>{
+  await axios.get(url)
+  .then(res =>{
+    setAddRoom(res.data.data)
+  })
+}
+useEffect(()=>{
+  fetchData()
+},[])
+
+
+
+
  const [currentPage, setCurrentPage] = useState(1);
  const [itemPerPage] = useState(5);
 
@@ -54,12 +74,20 @@ const Room = () => {
  const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
  const pages = [];
 
- for (let i = 1; i <= Math.ceil(data.length / itemPerPage); i++) {
+ const navigate = useNavigate();
+
+ for (let i = 1; i <= Math.ceil(addRoom.length / itemPerPage); i++) {
    pages.push(i);
  }
  const lastIndex = currentPage * itemPerPage;
  const firstIndex = lastIndex - itemPerPage;
- const currentIndex = data.slice(firstIndex, lastIndex);
+
+
+  const currentIndex=addRoom.slice(firstIndex, lastIndex);
+ 
+
+
+ 
 
  const pageClick = (e) => {
    setCurrentPage(Number(e.target.id));
@@ -82,29 +110,27 @@ const Room = () => {
 
  const filterData = currentIndex
  .filter((u)=>{
-   return search.toLowerCase() === '' ? u : u.name.toLowerCase().includes(search)
+   return search.toLowerCase() === '' ? u : u.Name.toLowerCase().includes(search)
  })
 
 
- const handleEdit = (el) => {
+ const handleEdit = async(el)  => {
 
 //  alert(`${url}/${el}`);
 
-  axios.get(`${url}/${el}`).then((res)=>
+ await axios.get(`${url}/${el}`).then((res)=>
    // myForm.current.reset()
-    setAddRoom(res.data)
- 
-  
-
+   setAddRoomData(res.data.data)
+   
   )
  // window.location.reload()
 };
 
-const handleDelete = (el) => {
+const handleDelete = async (el) => {
   const confirm = window.confirm("Are you want to delete?");
   if (confirm) {
    // alert(el);
-    axios
+   await axios
       .delete(url + "/" + el)
       .then((res) => {
         console.log(res.data);
@@ -113,23 +139,37 @@ const handleDelete = (el) => {
         console.log(err.message);
       });
   }
-  window.location.reload()
+ window.location.reload()
+ //navigate('/Disease')
 };
 
 
 const handleChange = (e) =>{
-  setAddRoom({
-    ...addRoom,[e.target.name]:e.target.value
+  setAddRoomData({
+    ...addRoomData,[e.target.name]:e.target.value
   })
 }
-const handelAdd = (e) =>{
+
+
+const handelAdd =  async(e) =>{
   e.preventDefault();
-  if(addRoom.id!=0)
+
+  let data = JSON.stringify({
+    id: addRoomData.Id,
+    name: addRoomData.Name//,
+   // description: addDiseaseData.Description
+  });
+
+  if(addRoomData.Id!=0)
   {
-    axios.put(url+"/"+addRoom.id,addRoom).then(res=>{
-      console.log(res.data)
-      window.location.reload()
-     // navigate('/appointment')
+    console.log("1");
+    
+
+
+  await  axios.put(url+"/"+addRoomData.Id,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+    
+     window.location.reload()
+     // navigate('/Disease')
     })
     .catch(err =>{
       console.log(err.message)
@@ -137,10 +177,12 @@ const handelAdd = (e) =>{
   }
   else
   {
-    axios.post(url,addRoom).then(res=>{
-      console.log(res.data)
-      window.location.reload()
-     // navigate('/appointment')
+    console.log("2");
+   
+  
+  await axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+       window.location.reload()
+    //  navigate('/Disease')
     })
     .catch(err =>{
       console.log(err.message)
@@ -160,22 +202,23 @@ const handelAdd = (e) =>{
   <hr></hr>
   <CardContent>
   <form   className="mx-auto flex items-center justify-center flex-col mt-8" onSubmit={handelAdd}> 
-  <div>   
-  <Label htmlFor="roomID">Room ID</Label>
-      <Input disabled="true" name="id" value={addRoom.id} onChange={handleChange}></Input>
-      <Label htmlFor="roomeName">Room Name</Label>
-      <Input placeholder="Disease Name" name="name" value={addRoom.name} onChange={handleChange} ></Input><br/>
+  <div>       
+  <Label htmlFor="diseaseid">Room ID</Label>
+      <Input disabled="true" name="Id" value={addRoomData.Id} onChange={handleChange}></Input>
+    
+      <Label htmlFor="diseaseName">Room Name</Label>
+      <Input  placeholder="Room Name" name="Name" value={addRoomData.Name} onChange={handleChange} ></Input><br/>
+      
       <input type="submit" value="Submit" className="px-2 py-1 bg-blue-400 w-[100%] m-4 cursor-pointer rounded-md"/>
-   
-    </div>  
+    </div> 
     </form> 
-    {loading && <h1>Loading...</h1>}
-    {error && <h1>Something went wrong</h1>}
+   {/*  {loading && <h1>Loading...</h1>}
+    {error && <h1>Something went wrong</h1>} */}
     <div className="flex px-4 items-center m-4">
           <h2 className="font-semibold">Showing <span className="font-bold text-xl text-blue-500">{currentIndex.length}</span> Rooms</h2>
           <input type="text" placeholder="Search..." className="border ml-4 w-[300px] px-2 py-1 rounded-md dark:text-black" onChange={(e)=> setSearch(e.target.value)}/>
         </div>
-    <Table>
+        <Table >
   <TableCaption></TableCaption>
   <TableHeader>
     <TableRow>
@@ -191,29 +234,30 @@ const handelAdd = (e) =>{
                 return (
                   <TableRow
                     className="border hover:bg-gray-100 text-center font-medium text-sm"
-                    key={d.id}
+                    key={d.Id}
                   >
-                      <TableCell className="px-6 py-2">{d.id}</TableCell>
-                    <TableCell className="px-6 py-2">{d.name}</TableCell>
+                      <TableCell className="px-6 py-2">{d.Id}</TableCell>
+                    <TableCell className="px-6 py-2">{d.Name}</TableCell>
                     <TableCell className="px-6 py-2 flex items-center justify-center">                     
                     <MdEdit
                         className="text-blue-400 mx-2"
                         size={20}
-                        onClick={() => handleEdit(d.id)}
+                        onClick={() => handleEdit(d.Id)}
                       />
                       <MdDelete
                         className="text-blue-400 mx-2"
                         size={20}
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handleDelete(d.Id)}
                       />
                     </TableCell>
                     {/* <TableCell className="text-right"> <Button>Edit</Button> <Button>Delete</Button></TableCell> */}
                     </TableRow> 
-                     );
-                    })}
+                );
+              })}
+
    
-  </TableBody>
-</Table>
+   </TableBody>
+</Table> 
 
 <div className={`${currentIndex.length=== 0 ? 'hidden':"flex items-center justify-start px-8 my-8 w-[100%] h-[40px] shadow-md fixed bottom-0 bg-blue-600`"}`}>
         <div className="pagination">
@@ -233,7 +277,7 @@ const handelAdd = (e) =>{
                   type="button"
                   className={
                     currentPage === p
-                      ? " py-1 mr-1 w-[30px] cursor-pointer rounded-sm bg-blue-900 text-white" 
+                      ? " py-1 mr-1 w-[30px] cursor-pointer rounded-sm bg-blue-900 text-white"
                       : "py-1 w-[30px]  cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-black dark:text-black mr-1"
                   }
                   key={index}
@@ -259,7 +303,7 @@ const handelAdd = (e) =>{
         </div>
   </CardContent>
   <CardFooter>
- 
+  
   </CardFooter>
 </Card>
       
