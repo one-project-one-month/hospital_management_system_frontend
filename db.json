@@ -1,19 +1,81 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "3",
       "title": "json-server",
       "author": "typicode"
     }
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "2",
       "body": "some comment",
       "postId": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+
+  "diseases": [
+    {
+      "id": "0",
+      "name": "yaw gar 1"
+    },
+    {
+      "id": "1",
+      "name": "yar gar 2"
+    },
+    {
+      "id": "2",
+      "name": "yaw gar 3"
+    },
+    {
+      "id": "3",
+      "name": "yaw gar 4"
+    },
+    {
+      "id": "4",
+      "name": "eeeeeee"
+    },
+    {
+      "id": "5",
+      "name": "fdfdfd"
+    },
+    {
+      "id": "6",
+      "name": "dfdfdfd"
+    },
+    {
+      "id": "7",
+      "name": "fdfdf"
+    },
+    {
+      "id": "8",
+      "name": "dfdfdf"
+    },
+    {
+      "id": "9",
+      "name": "fdfdf"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "3",
+      "name": "Room 33333"
+    },
+    {
+      "id": "4",
+      "name": "Room 4"
+    },
+    {
+      "id": "5",
+      "name": "Room 5"
+    },
+    {
+      "id": "6",
+      "name": "Room 6"
+    },
+    {
+      "id": "7",
+      "name": "Room 7"
+    }
+  ]
 }

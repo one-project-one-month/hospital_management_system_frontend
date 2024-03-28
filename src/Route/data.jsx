@@ -27,10 +27,6 @@ export const routes = [
                     {
                         path: "doctorSpecialist",
                         element: <h1>Doctor Specialist</h1>,
-                    },
-                    {
-                        path: "/Disease",
-                        element: <Disease />,
                     }
                 ]
             },
@@ -44,10 +40,6 @@ export const routes = [
                     {
                         path: "medicalRecords",
                         element: <h1>Medical Records</h1>,
-                    },
-                    {
-                        path: "/Room",
-                        element: <Room />,
                     }
                 ]
             },
@@ -67,4 +59,27 @@ export const routes = [
             
         ]
     },
+    {
+        path: "/Room",
+        children: [
+            {
+                index: true,
+                Component:Room
+            },
+            {
+                path:"/Room",
+                Component:Room
+            }
+        ]
+    },
+    // {
+    //     path: "/Room",
+    //     Component: Room
+    // },
+    ,
+    {
+        path: "/Disease",
+        Component: Disease
+    }
+      
 ]
