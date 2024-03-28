@@ -1,4 +1,3 @@
-
 import NotFound from "@/components/NotFound/NotFound.jsx";
 import Main from "../Layout/Main/Main.jsx";
 import { Home } from "../Pages/Home/Home.jsx";
@@ -7,6 +6,7 @@ import AddAppointment from "@/Pages/Appointment/AddAppointment.jsx";
 import Room from "@/Pages/Room/Room.jsx";
 import Disease from "@/Pages/Disease/Disease.jsx";
 import DoctorContainer from "@/Pages/Doctor/Doctor.jsx";
+import DoctorSpecialist from "@/Pages/DoctorSpecialist/DoctorSpecialist.jsx";
 import Pateint from "@/Pages/patient/Pateint.jsx";
 
 export const routes = [
@@ -28,7 +28,7 @@ export const routes = [
           },
           {
             path: "doctorSpecialist",
-            element: <h1>Doctor Specialist</h1>,
+            Component: DoctorSpecialist,
           },
         ],
       },
