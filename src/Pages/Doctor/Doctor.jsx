@@ -10,6 +10,7 @@ import { AvatarFallback } from "@radix-ui/react-avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Avatar } from "@radix-ui/react-avatar";
 import axios from "axios";
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,7 +25,7 @@ const DoctorCard = (props) => {
   const phoneNumber = data.MobileNumber;
   const image = "https://github.com/shadcn.png";
   return (
-    <Card className="w-[350px] flex flex-col">
+    <Card className="w-[250px] flex flex-col shadow-md shadow-green-400">
       <CardHeader className="text-center">
         <Avatar className="w-32 h-32 items-center justify-center m-auto">
           <AvatarImage
@@ -41,10 +42,10 @@ const DoctorCard = (props) => {
         <p className="flex justify-between p-2">
           Phone: <span>{phoneNumber}</span>
         </p>
-        <p className="flex justify-between p-2">
+        <p className="flex justify-between">
           Time:{" "}
           <span>
-            {start_duty} - {end_duty}
+            {start_duty}AM - {end_duty}PM
           </span>
         </p>
       </CardContent>
@@ -114,7 +115,7 @@ const DcotorsContainer = () => {
           No doctors found.
         </div>
       ) : (
-        <div className="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="m-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {doctors.map((doctor) => (
             <DoctorCard key={doctor.Id} props={doctor} />
           ))}

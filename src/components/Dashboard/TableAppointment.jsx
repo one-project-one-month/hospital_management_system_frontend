@@ -1,6 +1,26 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
 
 const TableAppointment = () => {
+
+    const [data , setData] = useState([]);
+
+
+
+    const getData = async() =>{
+        await axios.get('https://hospital-management-system-backend.vercel.app/api/v1/appointments')
+        .then(res =>{
+            setData(res.data.data)
+        })
+        .catch(err=>{
+            console.log(err.message)
+        })
+    }
+    useEffect(()=>{
+        getData();
+    },[])
   return (
     <>
     <div>
@@ -18,70 +38,20 @@ const TableAppointment = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
-                <tr className="border hover:bg-gray-400 text-center font-medium text-sm">
-                    <td className="px-6 py-2">AungAung</td>
-                    <td className="px-6 py-2">March 24 ,2024 3:00 PM</td>
-                    <td className="px-6 py-2">11</td>
-                    <td className="px-6 py-2">Kyaw Kyaw</td>
-                    <td className="px-6 py-2">104</td>
-                    <td className="px-6 py-2">Approved</td>
-                </tr>
+                {
+                    data.map((d)=>{
+                        return (
+                            <tr className="border hover:bg-gray-400 text-center font-medium text-sm" key={d.Id}>
+                            <td className="px-6 py-2">{d.Patient.Name}</td>
+                            <td className="px-6 py-2">{moment(d.AppointmentDate).format("LLL")}</td>
+                            <td className="px-6 py-2">11</td>
+                            <td className="px-6 py-2">{d.Doctor.DoctorName}</td>
+                            <td className="px-6 py-2">{d.Room.Name}</td>
+                            <td className="px-6 py-2 text-green-400">{d.Status}</td>
+                        </tr>
+                        )
+                    })
+                }
             </tbody>
         </table>
     </div>
