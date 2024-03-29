@@ -26,7 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { UserFetch } from "@/services/UseFetch"
+// import { UserFetch } from "@/services/UseFetch"
 import { useState } from "react"
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
@@ -68,7 +68,10 @@ useEffect(()=>{
 },[])
 
 
-
+const clearData = () =>{
+  addDiseaseData.Id=0;
+  addDiseaseData.Name="";
+}
 
  const [currentPage, setCurrentPage] = useState(1);
  const [itemPerPage] = useState(5);
@@ -137,14 +140,15 @@ const handleDelete = async (el) => {
    await axios
       .delete(url + "/" + el)
       .then((res) => {
-        console.log(res.data);
+        alert("Deleting Successful.");
+        clearData();
+        fetchData();
       })
       .catch((err) => {
         console.log(err.message);
       });
   }
- window.location.reload()
- //navigate('/Disease')
+
 };
 
 
@@ -172,8 +176,9 @@ const handelAdd =  async(e) =>{
 
   await  axios.put(url+"/"+addDiseaseData.Id,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
     
-     window.location.reload()
-     // navigate('/Disease')
+    alert("Updating Successful.");
+    clearData();
+    fetchData();
     })
     .catch(err =>{
       console.log(err.message)
@@ -185,8 +190,9 @@ const handelAdd =  async(e) =>{
    
   
   await axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
-       window.location.reload()
-    //  navigate('/Disease')
+    alert("Saving Successful.");
+    clearData();
+    fetchData();
     })
     .catch(err =>{
       console.log(err.message)

@@ -24,7 +24,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { UserFetch } from "@/services/UseFetch"
+// import { UserFetch } from "@/services/UseFetch"
 import { useState } from "react"
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
@@ -135,13 +135,15 @@ const handleDelete = async (el) => {
       .delete(url + "/" + el)
       .then((res) => {
         console.log(res.data);
+        alert("Deleting Successful.");
+        clearData();
+        fetchData();
       })
       .catch((err) => {
         console.log(err.message);
       });
   }
- window.location.reload()
- //navigate('/Disease')
+
 };
 
 
@@ -151,6 +153,10 @@ const handleChange = (e) =>{
   })
 }
 
+const clearData = () =>{
+  addRoomData.Id=0;
+  addRoomData.Name="";
+}
 
 const handelAdd =  async(e) =>{
   e.preventDefault();
@@ -168,8 +174,10 @@ const handelAdd =  async(e) =>{
 
 
   await  axios.put(url+"/"+addRoomData.Id,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
-    
-     window.location.reload()
+    alert("Updating Successful");
+    clearData();
+    fetchData();
+    // window.location.reload()
      // navigate('/Disease')
     })
     .catch(err =>{
@@ -182,8 +190,11 @@ const handelAdd =  async(e) =>{
    
   
   await axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
-       window.location.reload()
-    //  navigate('/Disease')
+     //  window.location.reload()
+    // navigate('/general')
+    alert("Saving Successful");
+    clearData();
+    fetchData();
     })
     .catch(err =>{
       console.log(err.message)
