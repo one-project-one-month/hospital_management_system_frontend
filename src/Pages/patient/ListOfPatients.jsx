@@ -359,7 +359,7 @@ const ListOfPatients = () => {
               </div>
               <div className="border-t flex justify-end pt-6 space-x-4">
                 <button type="button"
-                  className="px-6 py-2 rounded-md text-black text-sm border-none outline-none bg-gray-200 hover:bg-gray-300 active:bg-gray-200" onClick={()=>setIsEdit(false)}>Cancel</button>
+                  className="px-6 py-2 rounded-md text-black text-sm border-none outline-none bg-gray-200 hover:bg-gray-300 active:bg-gray-200" onClick={closeEdit}>Cancel</button>
                 <button type="button"
                   className="px-6 py-2 rounded-md text-white text-sm border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600" onClick={handleClickSave}>Save</button>
               </div>

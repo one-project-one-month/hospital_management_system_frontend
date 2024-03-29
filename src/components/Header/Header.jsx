@@ -1,28 +1,17 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom"
-// import { Button } from "../ui/button";
-// import { Plus } from "lucide-react"
+import { useLocation, useMatches } from "react-router-dom"
 
 export default function Header() {
 
-  const [ curLocation, setCurLocation ] = useState()
+  let location = useLocation();
 
-  const { state, pathname } = useLocation()
-
-  useEffect(() => {
-    if (pathname === "/") {
-      setCurLocation("Home")
-      return
-    }
-    setCurLocation(state?.title || '')
-  },[state, pathname])
+  const matches = useMatches()
+  const title = matches.filter(match => match.pathname === location.pathname).map(match => match.handle && match.handle.title)
 
   return (
-    <header className=" py-3 px-4 border-b border-b-neutral-200 flex items-center justify-between divide-x divide-neutral-100 dark:divide-neutral-700 dark:border-b-neutral-700">
-      <h1 className=" font-bold text-lg">{curLocation}</h1>
+    <header className="sticky top-0 bg-white py-3 px-4 border-b border-b-neutral-200 flex items-center justify-between divide-x divide-neutral-100 dark:divide-neutral-700 dark:border-b-neutral-700">
+      <h1 className=" font-bold text-lg">{title}</h1>
       <div className="flex">
-        {/* <Button><Plus className=" mr-2 h-4 w-4" />Add Patient</Button> */}
         <div className="px-2 flex gap-x-2 items-center cursor-pointer group">
           <Avatar className="h-7 w-7">
             <AvatarImage src="https://github.com/shadcn.png" />
