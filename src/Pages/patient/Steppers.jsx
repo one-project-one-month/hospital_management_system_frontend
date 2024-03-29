@@ -1,6 +1,6 @@
 import React from 'react'
 
-  const Steppers = ({isPersonalFormClick,isPersonalFormComplete,isContactFormClick,isContactFormComplete,   isMedicalRecordClick,isMedicalRecordComplete,response}) => {
+  const Steppers = ({isPersonalFormClick,isPersonalFormComplete,isContactFormClick,isContactFormComplete,isMedicalRecordClick,isMedicalRecordComplete,response}) => {
 
   return (
     <div className="flex items-start max-w-screen-md mx-auto mt-8">

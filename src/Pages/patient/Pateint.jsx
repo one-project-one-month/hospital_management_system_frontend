@@ -12,6 +12,7 @@ import {setIsHealthProfileClick} from '../../store/patient/healthProfile'
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast,Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ListOfPatients from './ListOfPatients';
 
 const Pateint = () => {
   const isPersonalFormComplete = useSelector(state => state.form.isFormComplete);
@@ -26,8 +27,12 @@ const Pateint = () => {
   const isHealthProfileClick = useSelector(state => state.healthProfile.isClick);
   const healthProfile = useSelector(state => state.healthProfile.healthProfileInfo)
   const [response, setResponse] = useState(false)
+  // const isResponseComplete = useSelector(state =>state.response.isResponseComplete)
+  // console.log(isResponseComplete);
 
   const [combinedDatas,setCombinedDatas] = useState ({});
+  const [datas,setDatas] = useState ([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -43,7 +48,7 @@ const Pateint = () => {
     if (Object.keys(combinedDatas).length !== 0) {
       try {
         const response = await toast.promise(
-          axios.post('http://localhost:3001/patients', combinedDatas),
+          axios.post('https://hospital-management-system-backend-7fee.vercel.app/api/v1/patients', combinedDatas),
           {
             pending: 'Adding in progress,please wait...',
             success: 'Successfully added a pateint',
@@ -60,34 +65,63 @@ const Pateint = () => {
     } 
   }
 
-  useEffect(()=>{
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow='scroll'
+  useEffect(() => {
+    const fetchData = async() => {
+      setIsLoading(true)
+      try {
+        const {data:{data}} = await axios.get('https://hospital-management-system-backend-7fee.vercel.app/api/v1/patients');
+        console.log(data);
+        setDatas(data)
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+      setIsLoading(false);
     }
-  },[])
+    fetchData();
+  }, [response])
+
+  // useEffect(()=>{
+  //   document.body.style.overflow = "hidden";
+  //   return () => {
+  //     document.body.style.overflow='scroll'
+  //   }
+  // },[])
 
   return (
+    <>
+    {!! isLoading && <p>Loading...</p>}
+    {!!datas && datas.length > 0  ? (
+    <ListOfPatients />
+    ) : !isLoading  &&  (
     <form onSubmit={handleSubmit} className='w-full h-full bg-blue-100 mx-auto px-[60px] py-[70px] '>
       <div className='bg-white w-full max-h-full rounded-xl p-8'>
         <div className='text-center font-bold text-xl text-black'>Patient Registration</div>
 
-        <Steppers isPersonalFormClick={isPersonalFormClick} isPersonalFormComplete={isPersonalFormComplete} isContactFormClick={isContactFormClick} isContactFormComplete={isContactFormComplete} isMedicalRecordClick={isHealthProfileClick} isMedicalRecordComplete={isHealthProfileComplete}
-        response={response}/>
+        <Steppers
+          isPersonalFormClick={isPersonalFormClick}
+          isPersonalFormComplete={isPersonalFormComplete}
+          isContactFormClick={isContactFormClick}
+          isContactFormComplete={isContactFormComplete}
+          isMedicalRecordClick={isHealthProfileClick}
+          isMedicalRecordComplete={isHealthProfileComplete}
+          response={response}
+        />
 
-        { !isPersonalFormComplete && <Personalinfo/> }
+        {!isPersonalFormComplete && <Personalinfo />}
+        
+        {isPersonalFormClick && isPersonalFormComplete && !isContactFormComplete && !isHealthProfileComplete && <Contactinfo />}
 
-        {isPersonalFormClick && isPersonalFormComplete && !isContactFormComplete && !isHealthProfileComplete && <Contactinfo/> }
+        {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <HealthProfile />}
 
-        {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <HealthProfile/>}
-
-        {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && <div className="max-w-screen-md mx-auto mt-8 text-right">
-          <Button type='submit' className='text-white'>Submit</Button>
-        </div>
-        }
-        <ToastContainer 
+        {isPersonalFormClick && isPersonalFormComplete && isContactFormClick && isContactFormComplete && (
+          <div className="max-w-screen-md mx-auto mt-8 text-right">
+            <Button type='submit' className='text-white'>Submit</Button>
+          </div>
+        )}
+        <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -96,9 +130,11 @@ const Pateint = () => {
         draggable
         pauseOnHover
         theme="light"
-        transition: Bounce />
+        />
       </div>
     </form>
+  )}
+  </>
   )
 }
 

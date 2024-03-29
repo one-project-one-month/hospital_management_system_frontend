@@ -42,7 +42,7 @@ const Contactinfo = () => {
                   name="phoneNumber" 
                   id="phoneNumber" 
                   className={`w-[80%] bg-gray-50 outline ${isContactFormClick && !contactInfo.phoneNumber ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
-                  text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
+                  text-sm rounded-lg focus:ring-blue-500 block focus:outline-blue-500 p-2.5 mt-3`}
                   value={contactInfo.phoneNumber}
                   onChange={changeHandler}
                   placeholder='Enter your phone number'
@@ -65,7 +65,7 @@ const Contactinfo = () => {
                   name="email" 
                   id="email" 
                   className={`w-[80%] bg-gray-50 outline ${isContactFormClick && !contactInfo.email ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
-                  text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
+                  text-sm rounded-lg focus:ring-blue-500 block focus:outline-blue-500 p-2.5 mt-3`}
                   value={contactInfo.email}
                   onChange={changeHandler}
                   placeholder='Enter your email'
@@ -89,7 +89,7 @@ const Contactinfo = () => {
                   name="address" 
                   id="address" 
                   className={`w-[40%] bg-gray-50 outline ${isContactFormClick && !contactInfo.address ? 'outline-red-400' : 'outline-gray-300'} text-gray-900 
-                  text-sm rounded-lg focus:ring-blue-500 block p-2.5 mt-3`}
+                  text-sm rounded-lg focus:ring-blue-500 block focus:outline-blue-500 p-2.5 mt-3`}
                   value={contactInfo.address}
                   onChange={changeHandler}
                   placeholder='Enter your address'

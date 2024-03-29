@@ -37,7 +37,7 @@ const HealthProfile = () => {
                 <label className='text-base font-semibold text-black'>Select Bloodtype</label>
                 <select id="bloodType" value={healthProfileInfo.bloodType} onChange={changeHandler}
                   name="bloodType" className={`bg-gray-50 outline  text-gray-900 
-                text-sm rounded-lg focus:ring-blue-500  block w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isHealthProfileClick && !healthProfileInfo.bloodType? 'outline-red-400' : 'outline-gray-300'} `}>
+                text-sm rounded-lg focus:ring-blue-500  block focus:outline-blue-500 w-[40%] p-2.5 mt-3 border-r-8 border-transparent ${isHealthProfileClick && !healthProfileInfo.bloodType? 'outline-red-400' : 'outline-gray-300'} `}>
                     <option value="">Blood type</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
