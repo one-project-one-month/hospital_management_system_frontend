@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   personalInfo: {
-    fullName: '',
-    dateOfBirth: '',
+    name: '',
+    birthDate: '',
     gender: ''
   },
   isFormComplete: false,
@@ -13,7 +13,7 @@ const initialState = {
 const formSlice = createSlice({
   name: 'form',
   initialState,
-  reducers: {
+  reducers : {
     setPersonalInfo: (state, action) => {
       state.personalInfo = { ...state.personalInfo, ...action.payload };
     },
