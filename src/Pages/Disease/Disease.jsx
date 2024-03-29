@@ -29,7 +29,6 @@ import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import axios from "axios";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Disease = () => {
   const [search, setSearch] = useState("");
@@ -65,7 +64,6 @@ const Disease = () => {
   const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
   const pages = [];
 
-  const navigate = useNavigate();
 
   for (let i = 1; i <= Math.ceil(addDisease.length / itemPerPage); i++) {
     pages.push(i);
@@ -151,6 +149,7 @@ const Disease = () => {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
+          console.log(res.data)
           window.location.reload();
           // navigate('/Disease')
         })
@@ -163,6 +162,7 @@ const Disease = () => {
       await axios
         .post(url, data, { headers: { "Content-Type": "application/json" } })
         .then((res) => {
+          console.log(res.data)
           window.location.reload();
           //  navigate('/Disease')
         })
@@ -176,8 +176,9 @@ const Disease = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            {" "}
-            <h1>Disease Setup</h1>
+            <div>
+              <h1>Disease Setup</h1>
+            </div>
           </CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
@@ -190,7 +191,7 @@ const Disease = () => {
             <div>
               <Label htmlFor="diseaseid">Disease ID</Label>
               <Input
-                disabled="true"
+                disabled={true}
                 name="Id"
                 value={addDiseaseData.Id}
                 onChange={handleChange}
@@ -303,7 +304,7 @@ const Disease = () => {
               </Link>
               <button
                 type="button"
-                className="py-1 w-[40px] mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-black dark:text-black"
+                className="py-1 w-[40px] mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-white dark:text-black"
                 onClick={prevClick}
                 disabled={currentPage === pages[0] ? true : false}
               >
@@ -317,7 +318,7 @@ const Disease = () => {
                       className={
                         currentPage === p
                           ? " py-1 mr-1 w-[30px] cursor-pointer rounded-sm bg-blue-900 text-white"
-                          : "py-1 w-[30px]  cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-black dark:text-black mr-1"
+                          : "py-1 w-[30px]  cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-white dark:text-black mr-1"
                       }
                       key={index}
                       id={p}
@@ -332,7 +333,7 @@ const Disease = () => {
               })}
               <button
                 type="button"
-                className="py-1 w-[40px]  mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-black dark:text-black"
+                className="py-1 w-[40px]  mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-white dark:text-black"
                 onClick={nextClick}
                 disabled={
                   currentPage === pages[pages.length - 1] ? true : false

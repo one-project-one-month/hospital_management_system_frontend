@@ -9,7 +9,6 @@ import Disease from "@/Pages/Disease/Disease.jsx";
 import DoctorContainer from "@/Pages/Doctor/Doctor.jsx";
 import DoctorSpecialist from "@/Pages/DoctorSpecialist/DoctorSpecialist.jsx";
 
-
 export const routes = [
   {
     path: "/",
@@ -47,7 +46,7 @@ export const routes = [
           {
             path: "medicalRecords",
             handle: { title: "Medical Records" },
-            element: <h1>Medical Records</h1>,
+           Component:Medical
           },
           {
             path: "/patient/Room",

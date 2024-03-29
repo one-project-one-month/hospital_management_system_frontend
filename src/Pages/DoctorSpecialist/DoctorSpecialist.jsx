@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@radix-ui/react-context-menu";
 import { Input } from "@/components/ui/input";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const doctorURL =
   "https://hospital-management-system-backend.vercel.app/api/v1/doctors";
@@ -28,6 +29,7 @@ function SpecialistDialog() {
     Description: "",
   });
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const handleSave = async (data) => {
     try {
       const res = await axios.post(specialistsURL, data);
@@ -38,6 +40,7 @@ function SpecialistDialog() {
         });
         setOpen(false);
         toast.success("Specialist created successfully");
+        navigate('/doctor/doctorSpecialist')
       } else {
         setOpen(false);
         toast.error("Error creating specialist");
@@ -92,7 +95,6 @@ function SpecialistDialog() {
                   ...newSpeicialist,
                   Description: e.target.value,
                 });
-                console.log(e.target.value);
               }}
             />
           </div>
@@ -163,6 +165,8 @@ const DoctorSpecialist = () => {
         showSuccessToast("✅ Doctor created successfully");
         fetchData().then((data) => {
           setData(data);
+          // eslint-disable-next-line no-undef
+          navigate('/doctor/doctorSpecialist')
         });
       } else {
         showErrorToast("❌ Something went wrong");
@@ -180,6 +184,8 @@ const DoctorSpecialist = () => {
         showSuccessToast(" Doctor deleted successfully");
         fetchData().then((data) => {
           setData(data);
+          // eslint-disable-next-line no-undef
+          navigate('/doctor/doctorSpecialist')
         });
       }
     } catch (error) {

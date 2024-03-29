@@ -97,7 +97,7 @@ export function DoctorDialog(props) {
               id="Phone"
               value={doctorData.MobileNumber}
               className="col-span-3"
-              type="number"
+              type="text"
               onChange={(e) =>
                 setDoctorData({ ...doctorData, MobileNumber: e.target.value })
               }

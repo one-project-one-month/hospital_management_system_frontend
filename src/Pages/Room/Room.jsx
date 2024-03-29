@@ -28,7 +28,6 @@ import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import axios from "axios";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Room = () => {
   const [search, setSearch] = useState("");
@@ -64,7 +63,6 @@ const Room = () => {
   const [miniPageNumberLimit, setMiniPageNumberLimit] = useState(0);
   const pages = [];
 
-  const navigate = useNavigate();
 
   for (let i = 1; i <= Math.ceil(addRoom.length / itemPerPage); i++) {
     pages.push(i);
@@ -150,6 +148,7 @@ const Room = () => {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
+          console.log(res.data)
           window.location.reload();
           // navigate('/Disease')
         })
@@ -162,6 +161,7 @@ const Room = () => {
       await axios
         .post(url, data, { headers: { "Content-Type": "application/json" } })
         .then((res) => {
+          console.log(res.data)
           window.location.reload();
           //  navigate('/Disease')
         })
@@ -176,8 +176,9 @@ const Room = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            {" "}
-            <h1>Room Setup</h1>
+            <div>
+              <h1>Room Setup</h1>
+            </div>
           </CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
@@ -190,7 +191,7 @@ const Room = () => {
             <div>
               <Label htmlFor="diseaseid">Room ID</Label>
               <Input
-                disabled="true"
+                disabled={true}
                 name="Id"
                 value={addRoomData.Id}
                 onChange={handleChange}
@@ -284,7 +285,7 @@ const Room = () => {
               </Link>
               <button
                 type="button"
-                className="py-1 w-[40px] mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-black dark:text-black"
+                className="py-1 w-[40px] mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-white dark:text-black"
                 onClick={prevClick}
                 disabled={currentPage === pages[0] ? true : false}
               >
@@ -298,7 +299,7 @@ const Room = () => {
                       className={
                         currentPage === p
                           ? " py-1 mr-1 w-[30px] cursor-pointer rounded-sm bg-blue-900 text-white"
-                          : "py-1 w-[30px]  cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-black dark:text-black mr-1"
+                          : "py-1 w-[30px]  cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-white dark:text-black mr-1"
                       }
                       key={index}
                       id={p}
@@ -313,7 +314,7 @@ const Room = () => {
               })}
               <button
                 type="button"
-                className="py-1 w-[40px]  mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-black dark:text-black"
+                className="py-1 w-[40px]  mr-1 cursor-pointer rounded-sm bg-blue-400 text-black dark:bg-white dark:text-black"
                 onClick={nextClick}
                 disabled={
                   currentPage === pages[pages.length - 1] ? true : false

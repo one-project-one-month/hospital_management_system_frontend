@@ -62,6 +62,20 @@ const Addappointment = () => {
       theme: "light",
     });
   };
+  const showSuccessToast = (message) => {
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      newestOnTop: false,
+      closeOnClick: true,
+      rtl: false,
+      pauseOnFocusLoss: true,
+      draggable: true,
+      pauseOnHover: true,
+      theme: "light",
+    });
+  };
   const handleDate = (e) =>{
     const pointDate = e.target.value;
     const date = new Date(pointDate);
@@ -78,6 +92,7 @@ const Addappointment = () => {
     .then(res=>{
       console.log(res.data)
       navigate('/appointment')
+      showSuccessToast('appointmet successfully')
 
     })
     .catch(err=>{

@@ -55,7 +55,7 @@ const Table = ({filterData}) => {
                   >
                     <td className="px-6 py-2">{d.Patient.Name}</td>
                     <td className="px-6 py-2">
-                      {moment(d.date).format("LLL")}
+                      {moment(d.AppointmentDate).format("LLL")}
                     </td>
                     <td className="px-6 py-2">{d.TokenId}</td>
                     <td className="px-6 py-2">{d.Doctor.DoctorName}</td>
