@@ -7,10 +7,14 @@ const DoctorInput = ({userData,setUserData,doctors}) => {
 
   const handelDoctor = (e) =>{
     const doctor = e.target.value;
+    console.log(doctor)
     // eslint-disable-next-line react/prop-types
     const selectDoctor = doctors.find((d) =>{
-     return d.DoctorName = doctor;
+     return d.DoctorName === doctor;
     })
+    console.log(selectDoctor)
+    console.log(selectedDoctorId)
+    
    if(selectDoctor){
     setSelectedDoctorId(selectDoctor.Id)
     setUserData({
