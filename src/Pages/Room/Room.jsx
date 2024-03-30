@@ -64,6 +64,119 @@ const Room = () => {
   const pages = [];
 
 
+ const pageClick = (e) => {
+   setCurrentPage(Number(e.target.id));
+ };
+
+ const prevClick = () => {
+   setCurrentPage((prev) => prev - 1);
+   if ((currentPage - 1) % pageNumberLimit == 0) {
+     setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+     setMiniPageNumberLimit(miniPageNumberLimit - pageNumberLimit);
+   }
+ };
+ const nextClick = () => {
+   setCurrentPage((prev) => prev + 1);
+   if (currentPage + 1 > maxPageNumberLimit) {
+     setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+     setMiniPageNumberLimit(miniPageNumberLimit + pageNumberLimit);
+   }
+ };
+
+ const filterData = currentIndex
+ .filter((u)=>{
+   return search.toLowerCase() === '' ? u : u.Name.toLowerCase().includes(search)
+ })
+
+
+ const handleEdit = async(el)  => {
+
+//  alert(`${url}/${el}`);
+
+ await axios.get(`${url}/${el}`).then((res)=>
+   // myForm.current.reset()
+   setAddRoomData(res.data.data)
+   
+  )
+ // window.location.reload()
+};
+
+const handleDelete = async (el) => {
+  const confirm = window.confirm("Are you want to delete?");
+  if (confirm) {
+   // alert(el);
+   await axios
+      .delete(url + "/" + el)
+      .then((res) => {
+        console.log(res.data);
+        alert("Deleting Successful.");
+        clearData();
+        fetchData();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+};
+
+
+const handleChange = (e) =>{
+  setAddRoomData({
+    ...addRoomData,[e.target.name]:e.target.value
+  })
+}
+
+const clearData = () =>{
+  addRoomData.Id=0;
+  addRoomData.Name="";
+}
+
+const handelAdd =  async(e) =>{
+  e.preventDefault();
+
+  let data = JSON.stringify({
+    id: addRoomData.Id,
+    name: addRoomData.Name//,
+   // description: addDiseaseData.Description
+  });
+
+  if(addRoomData.Id!=0)
+  {
+    console.log("1");
+    
+
+
+  await  axios.put(url+"/"+addRoomData.Id,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+    alert("Updating Successful");
+    clearData();
+    fetchData();
+    // window.location.reload()
+     // navigate('/Disease')
+    })
+    .catch(err =>{
+      console.log(err.message)
+    })
+  }
+  else
+  {
+    console.log("2");
+   
+  
+  await axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+     //  window.location.reload()
+    // navigate('/general')
+    alert("Saving Successful");
+    clearData();
+    fetchData();
+    })
+    .catch(err =>{
+      console.log(err.message)
+    })
+  }
+  
+ 
+};
   for (let i = 1; i <= Math.ceil(addRoom.length / itemPerPage); i++) {
     pages.push(i);
   }
@@ -97,79 +210,79 @@ const Room = () => {
       : u.Name.toLowerCase().includes(search);
   });
 
-  const handleEdit = async (el) => {
-    //  alert(`${url}/${el}`);
+//   const handleEdit = async (el) => {
+//     //  alert(`${url}/${el}`);
 
-    await axios.get(`${url}/${el}`).then((res) =>
-      // myForm.current.reset()
-      setAddRoomData(res.data.data)
-    );
-    // window.location.reload()
-  };
+//     await axios.get(`${url}/${el}`).then((res) =>
+//       // myForm.current.reset()
+//       setAddRoomData(res.data.data)
+//     );
+//     // window.location.reload()
+//   };
 
-  const handleDelete = async (el) => {
-    const confirm = window.confirm("Are you want to delete?");
-    if (confirm) {
-      // alert(el);
-      await axios
-        .delete(url + "/" + el)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-    window.location.reload();
-    //navigate('/Disease')
-  };
+//   const handleDelete = async (el) => {
+//     const confirm = window.confirm("Are you want to delete?");
+//     if (confirm) {
+//       // alert(el);
+//       await axios
+//         .delete(url + "/" + el)
+//         .then((res) => {
+//           console.log(res.data);
+//         })
+//         .catch((err) => {
+//           console.log(err.message);
+//         });
+//     }
+//     window.location.reload();
+//     //navigate('/Disease')
+//   };
 
-  const handleChange = (e) => {
-    setAddRoomData({
-      ...addRoomData,
-      [e.target.name]: e.target.value,
-    });
-  };
+//   const handleChange = (e) => {
+//     setAddRoomData({
+//       ...addRoomData,
+//       [e.target.name]: e.target.value,
+//     });
+//   };
 
-  const handelAdd = async (e) => {
-    e.preventDefault();
+//   const handelAdd = async (e) => {
+//     e.preventDefault();
 
-    let data = JSON.stringify({
-      id: addRoomData.Id,
-      name: addRoomData.Name, //,
-      // description: addDiseaseData.Description
-    });
+//     let data = JSON.stringify({
+//       id: addRoomData.Id,
+//       name: addRoomData.Name, //,
+//       // description: addDiseaseData.Description
+//     });
 
-    if (addRoomData.Id != 0) {
-      console.log("1");
+//     if (addRoomData.Id != 0) {
+//       console.log("1");
 
-      await axios
-        .put(url + "/" + addRoomData.Id, data, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((res) => {
-          console.log(res.data)
-          window.location.reload();
-          // navigate('/Disease')
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    } else {
-      console.log("2");
+//       await axios
+//         .put(url + "/" + addRoomData.Id, data, {
+//           headers: { "Content-Type": "application/json" },
+//         })
+//         .then((res) => {
+//           console.log(res.data)
+//           window.location.reload();
+//           // navigate('/Disease')
+//         })
+//         .catch((err) => {
+//           console.log(err.message);
+//         });
+//     } else {
+//       console.log("2");
 
-      await axios
-        .post(url, data, { headers: { "Content-Type": "application/json" } })
-        .then((res) => {
-          console.log(res.data)
-          window.location.reload();
-          //  navigate('/Disease')
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-  };
+//       await axios
+//         .post(url, data, { headers: { "Content-Type": "application/json" } })
+//         .then((res) => {
+//           console.log(res.data)
+//           window.location.reload();
+//           //  navigate('/Disease')
+//         })
+//         .catch((err) => {
+//           console.log(err.message);
+//         });
+//     }
+//   };
 
   return (
     <>

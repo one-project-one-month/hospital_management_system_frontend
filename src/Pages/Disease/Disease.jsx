@@ -38,11 +38,32 @@ const Disease = () => {
     Id: 0,
     Name: "",
   });
+ //const url = "http://localhost:3000/diseases";
+ //const url="https://hospital-management-system-backend.vercel.app/api/v1/appointments";
+ const url="https://hospital-management-system-backend.vercel.app/api/v1/diseases";
+ 
 
-  //const url = "http://localhost:3000/diseases";
-  //const url="https://hospital-management-system-backend.vercel.app/api/v1/appointments";
-  const url =
-    "https://hospital-management-system-backend.vercel.app/api/v1/diseases";
+ // eslint-disable-next-line no-unused-vars
+ //const {data , error , loading} = UserFetch(url);
+ 
+ const fetchData = async() =>{
+  await axios.get(url)
+  .then(res =>{
+    setAddDiseae(res.data.data)
+  })
+}
+useEffect(()=>{
+  fetchData()
+},[])
+
+
+const clearData = () =>{
+  addDiseaseData.Id=0;
+  addDiseaseData.Name="";
+}
+
+ const [currentPage, setCurrentPage] = useState(1);
+ const [itemPerPage] = useState(5);
 
   // eslint-disable-next-line no-unused-vars
   //const {data , error , loading} = UserFetch(url);
@@ -65,6 +86,74 @@ const Disease = () => {
   const pages = [];
 
 
+const handleDelete = async (el) => {
+  const confirm = window.confirm("Are you want to delete?");
+  if (confirm) {
+   // alert(el);
+   await axios
+      .delete(url + "/" + el)
+      .then((res) => {
+        alert("Deleting Successful.");
+        clearData();
+        fetchData();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+};
+
+
+const handleChange = (e) =>{
+  setAddDiseaeData({
+    ...addDiseaseData,[e.target.name]:e.target.value
+  })
+}
+
+
+const handelAdd =  async(e) =>{
+  e.preventDefault();
+
+  let data = JSON.stringify({
+    id: addDiseaseData.Id,
+    name: addDiseaseData.Name//,
+   // description: addDiseaseData.Description
+  });
+
+  if(addDiseaseData.Id!=0)
+  {
+    console.log("1");
+    
+
+
+  await  axios.put(url+"/"+addDiseaseData.Id,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+    
+    alert("Updating Successful.");
+    clearData();
+    fetchData();
+    })
+    .catch(err =>{
+      console.log(err.message)
+    })
+  }
+  else
+  {
+    console.log("2");
+   
+  
+  await axios.post(url,data,{headers:{"Content-Type" : "application/json"}}).then(res=>{
+    alert("Saving Successful.");
+    clearData();
+    fetchData();
+    })
+    .catch(err =>{
+      console.log(err.message)
+    })
+  }
+  
+ 
+};  
   for (let i = 1; i <= Math.ceil(addDisease.length / itemPerPage); i++) {
     pages.push(i);
   }
@@ -92,85 +181,85 @@ const Disease = () => {
     }
   };
 
-  const filterData = currentIndex.filter((u) => {
-    return search.toLowerCase() === ""
-      ? u
-      : u.Name.toLowerCase().includes(search);
-  });
+//   const filterData = currentIndex.filter((u) => {
+//     return search.toLowerCase() === ""
+//       ? u
+//       : u.Name.toLowerCase().includes(search);
+//   });
 
-  const handleEdit = async (el) => {
-    //  alert(`${url}/${el}`);
+//   const handleEdit = async (el) => {
+//     //  alert(`${url}/${el}`);
 
-    await axios.get(`${url}/${el}`).then((res) =>
-      // myForm.current.reset()
-      setAddDiseaeData(res.data.data)
-    );
-    // window.location.reload()
-  };
+//     await axios.get(`${url}/${el}`).then((res) =>
+//       // myForm.current.reset()
+//       setAddDiseaeData(res.data.data)
+//     );
+//     // window.location.reload()
+//   };
 
-  const handleDelete = async (el) => {
-    const confirm = window.confirm("Are you want to delete?");
-    if (confirm) {
-      // alert(el);
-      await axios
-        .delete(url + "/" + el)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-    window.location.reload();
-    //navigate('/Disease')
-  };
+//   const handleDelete = async (el) => {
+//     const confirm = window.confirm("Are you want to delete?");
+//     if (confirm) {
+//       // alert(el);
+//       await axios
+//         .delete(url + "/" + el)
+//         .then((res) => {
+//           console.log(res.data);
+//         })
+//         .catch((err) => {
+//           console.log(err.message);
+//         });
+//     }
+//     window.location.reload();
+//     //navigate('/Disease')
+//   };
 
-  const handleChange = (e) => {
-    setAddDiseaeData({
-      ...addDiseaseData,
-      [e.target.name]: e.target.value,
-    });
-  };
+//   const handleChange = (e) => {
+//     setAddDiseaeData({
+//       ...addDiseaseData,
+//       [e.target.name]: e.target.value,
+//     });
+//   };
 
-  const handelAdd = async (e) => {
-    e.preventDefault();
+//   const handelAdd = async (e) => {
+//     e.preventDefault();
 
-    let data = JSON.stringify({
-      id: addDiseaseData.Id,
-      name: addDiseaseData.Name, //,
-      // description: addDiseaseData.Description
-    });
+//     let data = JSON.stringify({
+//       id: addDiseaseData.Id,
+//       name: addDiseaseData.Name, //,
+//       // description: addDiseaseData.Description
+//     });
 
-    if (addDiseaseData.Id != 0) {
-      console.log("1");
+//     if (addDiseaseData.Id != 0) {
+//       console.log("1");
 
-      await axios
-        .put(url + "/" + addDiseaseData.Id, data, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((res) => {
-          console.log(res.data)
-          window.location.reload();
-          // navigate('/Disease')
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    } else {
-      console.log("2");
+//       await axios
+//         .put(url + "/" + addDiseaseData.Id, data, {
+//           headers: { "Content-Type": "application/json" },
+//         })
+//         .then((res) => {
+//           console.log(res.data)
+//           window.location.reload();
+//           // navigate('/Disease')
+//         })
+//         .catch((err) => {
+//           console.log(err.message);
+//         });
+//     } else {
+//       console.log("2");
 
-      await axios
-        .post(url, data, { headers: { "Content-Type": "application/json" } })
-        .then((res) => {
-          console.log(res.data)
-          window.location.reload();
-          //  navigate('/Disease')
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-  };
+//       await axios
+//         .post(url, data, { headers: { "Content-Type": "application/json" } })
+//         .then((res) => {
+//           console.log(res.data)
+//           window.location.reload();
+//           //  navigate('/Disease')
+//         })
+//         .catch((err) => {
+//           console.log(err.message);
+//         });
+//     }
+//   };
   return (
     <>
       <Card>
