@@ -11,8 +11,7 @@ import { AvatarImage } from "@radix-ui/react-avatar";
 import { Avatar } from "@radix-ui/react-avatar";
 import axios from "axios";
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,7 +24,7 @@ const DoctorCard = (props) => {
   const phoneNumber = data.MobileNumber;
   const image = "https://github.com/shadcn.png";
   return (
-    <Card className="w-[250px] flex flex-col shadow-md shadow-green-400">
+    <Card className="w-[300px] flex flex-col shadow-md shadow-green-400">
       <CardHeader className="text-center">
         <Avatar className="w-32 h-32 items-center justify-center m-auto">
           <AvatarImage
@@ -55,6 +54,7 @@ const DoctorCard = (props) => {
 
 const DcotorsContainer = () => {
   const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const showSuccessToast = (message) => {
     toast.success(message, {
@@ -93,11 +93,12 @@ const DcotorsContainer = () => {
         );
         if (response.status === 200) {
           const data = await response.data.data;
-
+          setLoading(false); // Data fetched, set loading to false
           showSuccessToast("✅ Data fetched successfully");
           return data;
         }
       } catch (error) {
+        setLoading(false); // Error occurred, set loading to false
         showFailToast("❌ Something went wrong");
         console.log(error);
         return [];
@@ -110,12 +111,14 @@ const DcotorsContainer = () => {
 
   return (
     <>
-      {doctors.length === 0 ? (
+      {loading ? (
+        <div className="text-center mt-4 text-2xl p-[45vh]">Loading...</div>
+      ) : doctors.length === 0 ? (
         <div className="text-center mt-4 text-2xl p-[45vh]">
           No doctors found.
         </div>
       ) : (
-        <div className="m-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="m-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
           {doctors.map((doctor) => (
             <DoctorCard key={doctor.Id} props={doctor} />
           ))}
