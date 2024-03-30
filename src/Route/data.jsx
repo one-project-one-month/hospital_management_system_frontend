@@ -3,11 +3,12 @@ import Main from "../Layout/Main/Main.jsx";
 import { Home } from "../Pages/Home/Home.jsx";
 import Appointment from "@/Pages/Appointment/Appointment.jsx";
 import AddAppointment from "@/Pages/Appointment/AddAppointment.jsx";
-import Patient from "../Pages/Patient/Pateint.jsx"
+import Patient from "@/Pages/patient/Pateint.jsx";
 import Room from "@/Pages/Room/Room.jsx";
 import Disease from "@/Pages/Disease/Disease.jsx";
 import DoctorContainer from "@/Pages/Doctor/Doctor.jsx";
 import DoctorSpecialist from "@/Pages/DoctorSpecialist/DoctorSpecialist.jsx";
+import Medical from "@/Pages/MedicalRecord/Medical.jsx";
 
 export const routes = [
   {
@@ -46,7 +47,7 @@ export const routes = [
           {
             path: "medicalRecords",
             handle: { title: "Medical Records" },
-           Component:Medical
+            Component: Medical,
           },
           {
             path: "/patient/Room",
@@ -54,13 +55,13 @@ export const routes = [
           },
           {
             path: "/patient/PatientRegistration",
-            element: <Patient/>,
-          }
+            element: <Patient />,
+          },
         ],
       },
       {
         path: "appointment",
-        handle: { title: "Appointment List"},
+        handle: { title: "Appointment List" },
         children: [
           {
             index: true,
@@ -68,14 +69,14 @@ export const routes = [
           },
           {
             path: "/appointment/add",
-            handle: { title: "New Appointment"},
+            handle: { title: "New Appointment" },
             Component: AddAppointment,
           },
         ],
       },
       {
         path: "general",
-        handle: { title: "Room"},
+        handle: { title: "Room" },
         children: [
           {
             index: true,
@@ -86,8 +87,8 @@ export const routes = [
             handle: { title: "Disease" },
             Component: Disease,
           },
-        ]
-      }
+        ],
+      },
     ],
   },
 ];
