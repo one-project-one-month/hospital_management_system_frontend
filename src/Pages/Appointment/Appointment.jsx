@@ -29,7 +29,7 @@ const Appointment = () => {
     const firstIndex = lastIndex - itemPerPage;
     const currentIndex = data.slice(firstIndex, lastIndex);
 
-    const filterData = data
+    const filterData = currentIndex
     .filter((u)=>{
       return search.toLowerCase() === '' ? u :u.Patient.Name.toLowerCase().includes(search) || u.Doctor.DoctorName.toLowerCase().includes(search) || u.Room.Name.toLowerCase().includes(search) || u.AppointmentDate.toLowerCase().includes(search) || u.Status.toLowerCase().includes(search)
     })

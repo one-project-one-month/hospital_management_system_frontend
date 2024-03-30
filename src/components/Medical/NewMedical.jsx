@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
 
 const NewMedical =() => {
   const [showModal, setShowModal] = React.useState(false);
@@ -41,18 +42,7 @@ const NewMedical =() => {
     getDisease();
   },[])
 
-  const getPatientId =(e)=>{
-    const patient = e.target.value
-    const selectMedical = patients.find((d) =>{
-      return d.Name = patient;
-     })
-     if(selectMedical){
-      console.log(selectMedical)
-      setCreateRecord({
-        ...createRecord,patientID:selectMedical.Id
-      })
-     }
-  }
+
   const getDiseaseId = (e)=>{
     const disease = e.target.value;
     const selectDisease = newDiseases.find((d)=>{
@@ -64,14 +54,46 @@ const NewMedical =() => {
       })
     }
   }
+
+  const showSuccessToast = (message) => {
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      newestOnTop: false,
+      closeOnClick: true,
+      rtl: false,
+      pauseOnFocusLoss: true,
+      draggable: true,
+      pauseOnHover: true,
+      theme: "light",
+    });
+  };
+  const showFailToast = (message) => {
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      newestOnTop: false,
+      closeOnClick: true,
+      rtl: false,
+      pauseOnFocusLoss: true,
+      draggable: true,
+      pauseOnHover: true,
+      theme: "light",
+    });
+  };
   const handleCreate =()=>{
     
     axios.post('https://hospital-management-system-backend.vercel.app/api/v1/medical-records' , createRecord)
     .then(res=>{
       console.log(res.data)
+      showSuccessToast('medical records create successfully')
+      window.location.reload()
     })
     .catch(err=>{
       console.log(err.message)
+      showFailToast('Patient Name is already created')
     })
   }
   console.log(createRecord)
@@ -118,10 +140,23 @@ const NewMedical =() => {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="p-8 flex flex-col">
-                    <div className="flex justify-between items-center">
-                        <label className="text-xl text-black p-2">Name:</label>
-                        <input type="text"  className="border p-2 text-black rounded-md" placeholder="Name" onChange={getPatientId}/>
+                <div className="p-8 flex jus flex-col">
+                    <div className="mt-2 flex justify-between items-center">
+                      <label className="text-xl text-black p-2">Patient</label>
+                      <select
+                        className="w-full border rounded-md h-[40px] text-black px-2"
+                        value={createRecord.patientID}
+                        onChange={(e) =>
+                          setCreateRecord({ ...createRecord, patientID: Number(e.target.value) })
+                        }
+                      >
+                          <option value="">Chose Patient Name</option>
+                          {patients.map((patient) => (
+                            <option key={patient.Id} value={patient.Id}>
+                              {patient.Name}
+                            </option>
+                          ))}
+                      </select>
                     </div>
                     <div className="mt-2 flex justify-between items-center">
                         <label className="text-xl text-black p-2">Start Date:</label>
@@ -133,7 +168,17 @@ const NewMedical =() => {
                     </div>
                     <div className="mt-2 flex justify-between items-center">
                         <label className="text-xl text-black p-2">Diseases:</label>
-                        <input type="text"  className="border p-2 text-black rounded-md" placeholder="Diseases" onChange={getDiseaseId}/>
+                        <select
+                          className="w-full border rounded-md h-[40px] text-black px-2"
+                          onChange={getDiseaseId}
+                        >
+                          <option value="">Select Disease</option>
+                          {newDiseases.map((disease) => (
+                            <option key={disease.Id} value={disease.Name}>
+                              {disease.Name}
+                            </option>
+                          ))}
+                        </select>
                     </div>
                     <div className="mt-2 flex justify-between items-center">
                         <label className="text-xl text-black p-2">Diagnosis:</label>
@@ -171,6 +216,7 @@ const NewMedical =() => {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+                <ToastContainer />
     </>
   );
 }
