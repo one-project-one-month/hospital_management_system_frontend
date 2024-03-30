@@ -70,7 +70,7 @@ export function DoctorDialog(props) {
               Specialist
             </Label>
             <SpecialistSelect
-              defaultValue={doctorData.Specialist}
+              defaultValue={doctorData.SpecialistId}
               setState={setDoctorData}
               doctorData={doctorData}
             />

@@ -1,7 +1,15 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+import React from "react";
 
-  const Steppers = ({isPersonalFormClick,isPersonalFormComplete,isContactFormClick,isContactFormComplete,isMedicalRecordClick,isMedicalRecordComplete,response}) => {
-
+const Steppers = ({
+  isPersonalFormClick,
+  isPersonalFormComplete,
+  isContactFormClick,
+  isContactFormComplete,
+  isMedicalRecordClick,
+  isMedicalRecordComplete,
+  response,
+}) => {
   return (
     <div className="flex items-start max-w-screen-md mx-auto mt-8">
       <div className="w-full">
@@ -47,13 +55,25 @@ import React from 'react'
           </div>
           <div className="w-[37%]">
             <div className="flex items-center">
-              <div className={`w-8 h-8 shrink-0 mx-[-1px] ${isMedicalRecordClick && isMedicalRecordComplete && response? `bg-blue-600` :`bg-gray-300`} p-1.5 flex items-center justify-center rounded-full`}>
+              <div
+                className={`w-8 h-8 shrink-0 mx-[-1px] ${
+                  isMedicalRecordClick && isMedicalRecordComplete && response
+                    ? `bg-blue-600`
+                    : `bg-gray-300`
+                } p-1.5 flex items-center justify-center rounded-full`}
+              >
                 <span className="text-base text-white font-bold">3</span>
               </div>
             </div>
             <div className="mt-2">
-              <h6 className="text-base font-semibold text-blue-500">Health Profile</h6>
-              <p className="text-xs text-gray-400">{isMedicalRecordClick && isMedicalRecordComplete && response ? `Completed` : `Pending`}</p>
+              <h6 className="text-base font-semibold text-blue-500">
+                Health Profile
+              </h6>
+              <p className="text-xs text-gray-400">
+                {isMedicalRecordClick && isMedicalRecordComplete && response
+                  ? `Completed`
+                  : `Pending`}
+              </p>
             </div>
           </div>
         </div>
