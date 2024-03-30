@@ -48,6 +48,19 @@ const MedicalTable = () => {
         return "Unknown"
       }
     }
+
+    const handleDelete = (Id) =>{
+      const confirm = window.confirm('Do You Want To Delete?')
+      if(confirm){
+        axios.delete(`https://hospital-management-system-backend.vercel.app/api/v1/medical-records/${Id}`)
+        .then(res=>{
+          console.log(res.data)
+        })
+        .catch(err=>{
+          console.log(err.message)
+        })
+      }
+    }
   return (
     <>
         <table className="table border-collapse w-[90%] mx-[auto] shadow-green-200 shadow-md ">
@@ -83,7 +96,7 @@ const MedicalTable = () => {
                           <Modal />
                           <MdDelete
                               className="text-red-500 mx-2 cursor-pointer"
-                              size={20}
+                              size={20} onClick={()=>handleDelete(r.Id)}
                           />
                       </td>
                     </tr>
