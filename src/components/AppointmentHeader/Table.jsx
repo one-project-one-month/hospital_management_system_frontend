@@ -22,6 +22,8 @@ const Table = ({filterData}) => {
   };
   
   const handelDelete = (Id) =>{
+    const confirm = window.confirm('Do You want to delete ?')
+    if(confirm){
       axios.delete(`${url}/${Id}`)
       .then(res=>{
         console.log(res.data)
@@ -29,6 +31,7 @@ const Table = ({filterData}) => {
       .catch(err =>{
         console.log(err.message)
       })
+    }
     }
   return (
     <>

@@ -60,7 +60,7 @@ const NewMedical =() => {
     })
     if(selectDisease){
       setCreateRecord({
-        ...createRecord,diseases:[...createRecord.diseases,{Id:selectDisease.Id} ]
+        ...createRecord,diseases:[...createRecord.diseases,{id:selectDisease.Id} ]
       })
     }
   }
@@ -75,7 +75,22 @@ const NewMedical =() => {
     })
   }
   console.log(createRecord)
-const time =(e)=> new Date(e.target.value).toISOString();
+  const handleStartDate = (e) =>{
+    const pointDate = e.target.value;
+    const date = new Date(pointDate);
+    const newDate = date.toISOString();
+    setCreateRecord({
+      ...createRecord, startDate: newDate
+    })
+  }
+  const handleEndDate = (e) =>{
+    const pointDate = e.target.value;
+    const date = new Date(pointDate);
+    const newDate = date.toISOString();
+    setCreateRecord({
+      ...createRecord, endDate: newDate
+    })
+  }
   return (
     <>
       <button className='bg-[#3b82f6] p-2 flex items-center rounded-md' onClick={() => setShowModal(true)}>
@@ -110,11 +125,11 @@ const time =(e)=> new Date(e.target.value).toISOString();
                     </div>
                     <div className="mt-2 flex justify-between items-center">
                         <label className="text-xl text-black p-2">Start Date:</label>
-                        <input type="text"  className="border p-2 text-black rounded-md" placeholder="Start Date" onChange={(e)=>{setCreateRecord({...createRecord,startDate:time(e)})}}/>
+                        <input type="datetime-local"  className="border p-2 text-black rounded-md" placeholder="Start Date" onChange={handleStartDate}/>
                     </div>
                     <div className="mt-2 flex justify-between items-center">
                         <label className="text-xl text-black p-2">End Date:</label>
-                        <input type="text"  className="border p-2 text-black rounded-md" placeholder="End Date" onChange={(e)=>{setCreateRecord({...createRecord,endDate:time(e)})}}/>
+                        <input type="datetime-local"  className="border p-2 text-black rounded-md" placeholder="End Date" onChange={handleEndDate}/>
                     </div>
                     <div className="mt-2 flex justify-between items-center">
                         <label className="text-xl text-black p-2">Diseases:</label>
