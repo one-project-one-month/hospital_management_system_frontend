@@ -3,7 +3,7 @@ import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react'
 import { MdDelete }from "react-icons/md";
-import Modal from './EditMedical';
+// eslint-disable-next-line react-hooks/rules-of-hooks
 import moment from "moment";
 
 const MedicalTable = () => {
@@ -33,6 +33,7 @@ const MedicalTable = () => {
       })
     }
 
+
     useEffect(()=>{
         getData()
         getPatient()
@@ -48,6 +49,7 @@ const MedicalTable = () => {
         return "Unknown"
       }
     }
+    
 
     const handleDelete = (Id) =>{
       const confirm = window.confirm('Do You Want To Delete?')
@@ -93,7 +95,6 @@ const MedicalTable = () => {
                       <td className="px-6 py-2">{r.Note}</td>
                       <td className='px-6 py-2'>{r.Treatment}</td>
                       <td className="px-6 py-2 flex items-center justify-center">
-                          <Modal />
                           <MdDelete
                               className="text-red-500 mx-2 cursor-pointer"
                               size={20} onClick={()=>handleDelete(r.Id)}

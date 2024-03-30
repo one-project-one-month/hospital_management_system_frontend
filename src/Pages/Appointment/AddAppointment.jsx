@@ -116,9 +116,9 @@ const Addappointment = () => {
           </h2>
           {/* Patient Select Input */}
           <div className="px-4 flex flex-col mt-6">
-            <label className="text-xl font-bold">Patient</label>
+            <label className="text-xl font-bold text-red-400">Patient</label>
             <select
-              className="w-full mt-2 border rounded-md h-[100%] px-4 text-black"
+              className="w-full mt-2 border rounded-md h-[40px] px-4 text-black"
               value={userData.PatientId}
               onChange={(e) =>
                 setUserData({ ...userData, PatientId: Number(e.target.value) })
@@ -134,9 +134,9 @@ const Addappointment = () => {
           </div>
           {/* Doctor Select Input */}
           <div className="px-4 flex flex-col mt-6">
-            <label className="text-xl font-bold">Doctor</label>
+            <label className="text-xl font-bold text-red-400">Doctor</label>
             <select
-              className="w-full mt-2 border rounded-md h-[100%] px-4 text-black"
+              className="w-full mt-2 border rounded-md h-[40px] px-4 text-black"
               value={userData.DoctorId}
               onChange={(e) =>
                 setUserData({ ...userData, DoctorId: Number(e.target.value) })
@@ -152,9 +152,9 @@ const Addappointment = () => {
           </div>
           {/* Room Select Input */}
           <div className="px-4 flex flex-col mt-6">
-            <label className="text-xl font-bold">Room</label>
+            <label className="text-xl font-bold text-red-400">Room</label>
             <select
-              className="w-full mt-2 border rounded-md h-[100%] px-4 text-black"
+              className="w-full mt-2 border rounded-md h-[40px] px-4 text-black"
               value={userData.RoomId}
               onChange={(e) =>
                 setUserData({ ...userData, RoomId: Number(e.target.value) })
@@ -172,7 +172,7 @@ const Addappointment = () => {
             <label className="text-xl font-bold text-red-400">Date</label>
             <input
               type="datetime-local"
-              className="w-[100%] mt-2 border rounded-md h-[100%] px-4 text-black"
+              className="w-[100%] mt-2 border rounded-md h-[40px] px-4 text-black"
               name="date"
               onChange={handleDate}
             />

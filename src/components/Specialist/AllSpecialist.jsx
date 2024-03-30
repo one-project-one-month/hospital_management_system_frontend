@@ -18,6 +18,7 @@ import { DeleteComformationDialog } from "../Doctor/DeleteConformationDialog";
 
 export function DoctorDialog(props) {
   const data = props.props;
+  console.log(data)
   const [doctorData, setDoctorData] = useState({
     DoctorName: data.DoctorName,
     SpecialistId: data?.Specialist?.Id,
