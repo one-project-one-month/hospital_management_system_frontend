@@ -22,6 +22,8 @@ const Table = ({filterData}) => {
   };
   
   const handelDelete = (Id) =>{
+    const confirm = window.confirm('Do You want to delete ?')
+    if(confirm){
       axios.delete(`${url}/${Id}`)
       .then(res=>{
         console.log(res.data)
@@ -29,6 +31,7 @@ const Table = ({filterData}) => {
       .catch(err =>{
         console.log(err.message)
       })
+    }
     }
   return (
     <>
@@ -55,7 +58,7 @@ const Table = ({filterData}) => {
                   >
                     <td className="px-6 py-2">{d.Patient.Name}</td>
                     <td className="px-6 py-2">
-                      {moment(d.date).format("LLL")}
+                      {moment(d.AppointmentDate).format("LLL")}
                     </td>
                     <td className="px-6 py-2">{d.TokenId}</td>
                     <td className="px-6 py-2">{d.Doctor.DoctorName}</td>

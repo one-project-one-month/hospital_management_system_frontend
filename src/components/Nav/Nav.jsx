@@ -8,6 +8,15 @@ import { useState } from "react";
 const navLinks = [
   { title: "Home", icon: <Home size={16} />, url: "/" },
   {
+    title: "General",
+    icon: <FileText size={16} />,
+    url: "/general",
+    nested: [
+      { title: "Room", url: "/general"},
+      {title:"Disease ", url:"/general/disease"}
+    ],
+  },
+  {
     title: "Doctor",
     icon: <Stethoscope size={16} />,
     url: "/doctor",
@@ -32,15 +41,6 @@ const navLinks = [
     nested: [
       { title: "Appointment List", url: "/appointment" },
       { title: "New Appointment ", url: "/appointment/add" },
-    ],
-  },
-  {
-    title: "General",
-    icon: <FileText size={16} />,
-    url: "/general",
-    nested: [
-      { title: "Room", url: "/general"},
-      {title:"Disease ", url:"/general/disease"}
     ],
   },
 ];

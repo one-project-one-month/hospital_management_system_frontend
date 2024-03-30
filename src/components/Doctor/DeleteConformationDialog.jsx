@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 export function DeleteComformationDialog({ deleteFunction, Id }) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
+      <AlertDialogTrigger asChild className="bg-red-500 text-white">
         <Button variant="outline">Delete</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

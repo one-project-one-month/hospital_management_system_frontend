@@ -3,11 +3,11 @@ import Main from "../Layout/Main/Main.jsx";
 import { Home } from "../Pages/Home/Home.jsx";
 import Appointment from "@/Pages/Appointment/Appointment.jsx";
 import AddAppointment from "@/Pages/Appointment/AddAppointment.jsx";
+import Patient from "../Pages/Patient/Pateint.jsx"
 import Room from "@/Pages/Room/Room.jsx";
 import Disease from "@/Pages/Disease/Disease.jsx";
 import DoctorContainer from "@/Pages/Doctor/Doctor.jsx";
 import DoctorSpecialist from "@/Pages/DoctorSpecialist/DoctorSpecialist.jsx";
-import Pateint from "@/Pages/patient/Pateint.jsx";
 
 export const routes = [
   {
@@ -41,13 +41,21 @@ export const routes = [
         children: [
           {
             index: true,
-            Component: Pateint,
+            Component: Patient,
           },
           {
             path: "medicalRecords",
             handle: { title: "Medical Records" },
-            element: <h1>Medical Records</h1>,
+           Component:Medical
           },
+          {
+            path: "/patient/Room",
+            element: <Room />,
+          },
+          {
+            path: "/patient/PatientRegistration",
+            element: <Patient/>,
+          }
         ],
       },
       {
