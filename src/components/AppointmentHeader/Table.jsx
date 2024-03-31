@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import axios from "axios";
 import moment from "moment";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const Table = ({filterData}) => {
 
@@ -20,7 +20,11 @@ const Table = ({filterData}) => {
       console.error("Error updating appointment status:", error);
     });
   };
-  
+  const handleClick = (Id)=>{
+    axios.put(`${url}/${Id}`,{
+      ...Id,Status:"Completed"
+    })
+  }
   const handelDelete = (Id) =>{
     const confirm = window.confirm('Do You want to delete ?')
     if(confirm){
@@ -60,10 +64,10 @@ const Table = ({filterData}) => {
                     <td className="px-6 py-2">
                       {moment(d.AppointmentDate).format("LLL")}
                     </td>
-                    <td className="px-6 py-2">{d.TokenId}</td>
+                    <td className="px-6 py-2">{d.Id}</td>
                     <td className="px-6 py-2">{d.Doctor.DoctorName}</td>
                     <td className="px-6 py-2">{d.Room.Name}</td>
-                    <td className={`${d.IsCancel ? 'text-red-600 px-6 py-2' : 'text-green-600 px-6 py-2'}`}>{d.Status}</td>
+                    <td className={`${d.IsCancel ? 'text-red-400' : d.Status === 'Pending' ? 'text-yellow-400' : 'text-green-400'} px-6 py-2`}>{d.Status}</td>
                     <td className="px-6 py-2 flex items-center justify-center">
                       <input
                         type="checkbox"
@@ -71,6 +75,7 @@ const Table = ({filterData}) => {
                         checked={d.IsCancel}
                         onChange={() => handleCancel(d.Id)}
                       />
+                      <MdEdit size={20}  className="text-blue-600 mx-2 cursor-pointer" onClick={()=>handleClick(d.Id)}/>
                       <MdDelete
                         className="text-red-400 mx-2 cursor-pointer"
                         size={20}
