@@ -88,11 +88,16 @@ const Room = () => {
 
   const currentIndex = addRoom.slice(firstIndex, lastIndex);
 
-  const filterData = currentIndex.filter((u) => {
+  const filterData = addRoom.filter((u) => {
     return search.toLowerCase() === ""
       ? u
       : u.Name.toLowerCase().includes(search);
   });
+
+  const lastIndex = currentPage * itemPerPage;
+  const firstIndex = lastIndex - itemPerPage;
+
+  const slicedData = filterData.slice(firstIndex, lastIndex);
 
   const handleEdit = async (el) => {
     //  alert(`${url}/${el}`);
@@ -228,7 +233,7 @@ const Room = () => {
             <h2 className="font-semibold">
               Showing{" "}
               <span className="font-bold text-xl text-blue-500">
-                {currentIndex.length}
+                {slicedData.length}
               </span>{" "}
               Rooms
             </h2>
@@ -280,7 +285,7 @@ const Room = () => {
 
           <div
             className={`${
-              currentIndex.length === 0
+              slicedData.length === 0
                 ? "hidden"
                 : "flex items-center justify-start px-8 my-8 w-[100%] h-[40px] shadow-md fixed bottom-0 bg-blue-600`"
             }`}
