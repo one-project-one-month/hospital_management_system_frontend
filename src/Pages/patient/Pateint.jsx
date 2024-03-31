@@ -140,7 +140,7 @@ const Pateint = () => {
             className="w-full h-full bg-blue-100 mx-auto px-[60px] py-[70px] "
           >
             <div className="bg-white w-full max-h-full rounded-xl p-8">
-              <div className="text-center font-bold text-xl text-black">
+              <div className="text-center font-bold text-xl text-black dark:text-white">
                 Patient Registration
               </div>
 
