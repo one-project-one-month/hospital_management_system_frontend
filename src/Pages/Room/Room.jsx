@@ -80,6 +80,13 @@ const Room = () => {
       setMiniPageNumberLimit(miniPageNumberLimit + pageNumberLimit);
     }
   };
+  for (let i = 1; i <= Math.ceil(addRoom.length / itemPerPage); i++) {
+    pages.push(i);
+  }
+  const lastIndex = currentPage * itemPerPage;
+  const firstIndex = lastIndex - itemPerPage;
+
+  const currentIndex = addRoom.slice(firstIndex, lastIndex);
 
   const filterData = addRoom.filter((u) => {
     return search.toLowerCase() === ""
@@ -149,6 +156,7 @@ const Room = () => {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
+          console.log(res.data.data)
           alert("Updating Successful");
           clearData();
           fetchData();
@@ -164,6 +172,7 @@ const Room = () => {
       await axios
         .post(url, data, { headers: { "Content-Type": "application/json" } })
         .then((res) => {
+          console.log(res.data.data)
           //  window.location.reload()
           // navigate('/general')
           alert("Saving Successful");
@@ -175,11 +184,6 @@ const Room = () => {
         });
     }
   };
-  for (let i = 1; i <= Math.ceil(addRoom.length / itemPerPage); i++) {
-    pages.push(i);
-  }
-
-  const currentIndex = addRoom.slice(firstIndex, lastIndex);
 
   return (
     <>

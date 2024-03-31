@@ -47,7 +47,7 @@ const TableAppointment = () => {
                             <td className="px-6 py-2">11</td>
                             <td className="px-6 py-2">{d.Doctor.DoctorName}</td>
                             <td className="px-6 py-2">{d.Room.Name}</td>
-                            <td className="px-6 py-2 text-green-400">{d.Status}</td>
+                            <td className={`${d.IsCancel ? 'text-red-400' : d.Status === 'Pending' ? 'text-yellow-400' : 'text-green-400'} px-6 py-2`}>{d.Status}</td>
                         </tr>
                         )
                     })
