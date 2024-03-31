@@ -2,15 +2,19 @@
 import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react'
-import { MdDelete }from "react-icons/md";
+import { MdDelete, MdEdit }from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
 // eslint-disable-next-line react-hooks/rules-of-hooks
 import moment from "moment";
+import Modal from './EditMedical';
 
 const MedicalTable = () => {
 
     const [records , setRecords]  = useState([]);
     const [patients, setPatients] = useState([])
-
+    const [showModal , setShowModal] = useState(false);
+    const [editMedical , setEditMedical] = useState([])
+    console.log(editMedical)
 
     const getData = async() =>{
         await axios.get('https://hospital-management-system-backend.vercel.app/api/v1/medical-records')
@@ -49,8 +53,13 @@ const MedicalTable = () => {
         return "Unknown"
       }
     }
-    
-
+    const handleEdit =(Id)=>{
+      setShowModal(true)
+      const selectMedical = records.find((r)=>{
+        return r.Id === Id
+      })    
+      setEditMedical(selectMedical)  
+    }
     const handleDelete = (Id) =>{
       const confirm = window.confirm('Do You Want To Delete?')
       if(confirm){
@@ -63,6 +72,60 @@ const MedicalTable = () => {
         })
       }
     }
+
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setEditMedical({
+        ...editMedical,
+        [name]: value,
+      });
+    };
+    const handleSave =(e)=>{
+      e.preventDefault()
+      setShowModal(false)
+      axios.put(`https://hospital-management-system-backend.vercel.app/api/v1/medical-records/${editMedical.Id}`,editMedical)
+      .then(res=>{
+        console.log(res.data)
+        showSuccessToast('medical records changese successfully')
+        window.location.reload()
+      })
+      .catch(err=>{
+        console.log(err.message)
+        showFailToast(err.message)
+      })
+    }
+
+    const handleCross = ()=>{
+      setShowModal(false)
+    }
+    const showSuccessToast = (message) => {
+      toast.success(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnFocusLoss: true,
+        draggable: true,
+        pauseOnHover: true,
+        theme: "light",
+      });
+    };
+    const showFailToast = (message) => {
+      toast.error(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnFocusLoss: true,
+        draggable: true,
+        pauseOnHover: true,
+        theme: "light",
+      });
+    };
   return (
     <>
         <table className="table border-collapse w-[90%] mx-[auto] shadow-green-200 shadow-md ">
@@ -95,6 +158,9 @@ const MedicalTable = () => {
                       <td className="px-6 py-2">{r.Note}</td>
                       <td className='px-6 py-2'>{r.Treatment}</td>
                       <td className="px-6 py-2 flex items-center justify-center">
+                        <MdEdit className="text-blue-500 mx-2 cursor-pointer"
+                          size={20} onClick={()=>handleEdit(r.Id)}/>
+                          <Modal handleSave={handleSave} showModal={showModal} handleCross={handleCross} editMedical={editMedical} handleInputChange={handleInputChange} getPatientName={getPatientName}/>
                           <MdDelete
                               className="text-red-500 mx-2 cursor-pointer"
                               size={20} onClick={()=>handleDelete(r.Id)}
@@ -106,6 +172,7 @@ const MedicalTable = () => {
                 }
         </tbody>
       </table>
+      <ToastContainer/>
     </>
   )
 }

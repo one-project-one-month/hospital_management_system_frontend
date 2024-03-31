@@ -287,7 +287,7 @@ const ListOfPatients = () => {
           </div>
         </div>
       </div>
-      <div className='bg-white h-full w-full rounded-xl p-6 mt-6'>
+      <div className='bg-white h-full w-full rounded-xl p-6 mt-6 dark:text-black'>
         <div className='w-full flex items-center  flex-wrap gap-5'>
           {!!datas && datas.map((data,index)=> (
             <div key={index} className='w-[245px] max-h-[200px] bg-white p-3 border border-gray-200 rounded-lg text-left space-y-4 '>
